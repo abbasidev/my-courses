@@ -1,0 +1,94 @@
+
+Get-Help
+Get-Verb
+Get-Alias
+Get-Command
+Get-Service
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+#Demo-M2-01
+
+// پاورشل حساس به حروف بزرگ و کوچک نیست
+cls === CLS === Cls === cLS
+
+// | more 
+// برای اینکه با اینتر متن رو بخونیم و یهو به پایین ترین خط نره از مور استفاده میکنیم 
+
+Get-Help | more 
+
+Get-Verb -Verb m*
+
+Get-Verb -Verb c*
+
+Get-Verb -Verb set
+
+Get-Verb -Verb measure
+
+Get-Verb -Group Security
+
+start https://abbasidev.netlify.app/
+
+Help remove
+
+Help -verb remove
+
+Get-service
+
+Get-service -Name P* -RequiredServices
+
+Get-Alias -Name S*
+  
+Get-Alias -Name G* | Format-Table Name,Definition
+
+Get-Alias -Definition *service*  
+
+gsv -Name P* -RequiredServices
+
+get-help gsv
+
+gsv p* -RequiredServices
+
+gsv P* -Req
+
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+#Demo 3 - Get Commands
+
+Write-host "Starting Get-command"
+
+Help get-command  
+
+Help Get-Command -examples 
+
+get-command -verb New
+
+get-command -CommandType Function
+
+get-alias -Definition *command*
+
+gcm -verb New
+
+#You are looking for a command to view with IP Address Configurations on a Windows System
+gcm -name *IP*
+
+gcm -name Get*IP*
+
+gcm -name Get*IPaddress*
+
+help Get-NetIPAddress -examples
+
+get-NetIPAddress
+
+get-NetIPAddress | format-table
+
+gcm -name *alias
+
+help new-alias -examples
+
+set-alias -name IP -value get-NetIPAddress
+IP | format-table
