@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <style>
+      html {
+        font-size: 20px;
+      }
+      #container {
+        margin: 50px auto;
+        width: 500px;
+        max-width: 90vw;
+        background-color: #eee;
+        border: 2px solid black;
+        padding: 16px;
+      }
+
+      #text {
+        font-size: 18px;
+        line-height: 1.7;
+      }
+      #slider {
+        margin: 10px auto;
+        width: 260px;
+        display: block;
+      }
+    </style>
+    <title>Resize Observer Application</title>
+  </head>
+  <body>
+    <button class="btn btn-primary m-2" id="observe">Observe</button>
+    <button class="btn btn-success m-2" id="unobserve">Unobserve</button>
+    <div id="container">
+      <h2 id="title" class="fw-bold">Test Title</h2>
+      <p id="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio obcaecati
+        libero at dolores voluptatem quos sed suscipit reiciendis assumenda
+        sequi. Sequi maiores aliquam soluta quidem corporis nihil quia enim
+        laborum!
+      </p>
+
+      <input
+        type="range"
+        min="300"
+        value="500"
+        max="1300"
+        step="10"
+        id="slider"
+      />
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

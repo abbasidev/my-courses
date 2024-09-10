@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "007 LL Binary to Decimal (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p><strong>Objective:</strong></p><p>You have a linked list where each node represents a binary digit (0 or 1). The goal of the <code><strong>binaryToDecimal</strong></code> function is to convert this binary number, represented by the linked list, into its decimal equivalent.</p><p><br></p><p><strong>How Binary to Decimal Conversion Works:</strong></p><p>In binary-to-decimal conversion, each position of a binary number corresponds to a specific power of 2, starting from the rightmost digit.</p><ul><li><p>The rightmost digit is multiplied by 2^0 (which equals 1).</p></li><li><p>The next digit to the left is multiplied by 2^1 (which equals 2).</p></li><li><p>The digit after that is multiplied by 2^2 (which equals 4). ... and so on.</p></li></ul><p>To find the decimal representation:</p><ol><li><p>Multiply each binary digit by its corresponding power of 2 value.</p></li><li><p>Sum up all these products.</p></li></ol><p><br></p><p><strong>Example Execution with Binary </strong><code><strong>101</strong></code><strong>:</strong></p><ol><li><p>Start with <code><strong>num = 0</strong></code>.</p></li><li><p>Process <code><strong>1</strong></code> (from the head of the linked list): <code><strong>num = 0 * 2 + 1 = 1</strong></code></p></li><li><p>Process <code><strong>0</strong></code>: <code><strong>num = 1 * 2 + 0 = 2</strong></code></p></li><li><p>Process <code><strong>1</strong></code>: <code><strong>num = 2 * 2 + 1 = 5</strong></code></p></li><li><p>Return <code><strong>num</strong></code>, which is <code><strong>5</strong></code>.</p></li></ol><p><br></p><p><strong>Steps Involved in the Function:</strong></p><ol><li><p>A variable <code><strong>num</strong></code> is initialized to 0, which will store our computed decimal number.</p></li><li><p>Starting from the head of the linked list (the leftmost binary digit), iterate through each node until the end.</p></li><li><p>For every node, double the current value of <code><strong>num</strong></code> (this is analogous to shifting in binary representation). Then, add the binary digit of the current node.</p></li><li><p>Move to the next node and repeat until you've visited all nodes.</p></li><li><p>Return the value in <code><strong>num</strong></code>, which now represents the decimal value of the binary number in the linked list.</p></li></ol><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-08-24_17-48-46-53846dd2db826950905016526200dc1d.png\"></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe(\"binaryToDecimal\", function() {\n\n    it(\"should convert an empty list to 0\", function() {\n        const myList = new LinkedList(0);\n        myList.makeEmpty();\n        expect(myList.binaryToDecimal()).toEqual(0);\n    });\n\n    it(\"should convert a list with one element correctly\", function() {\n        const myList = new LinkedList(1);\n        expect(myList.binaryToDecimal()).toEqual(1);\n    });\n\n    it(\"should convert a list with multiple elements correctly\", function() {\n        const myList = new LinkedList(1);\n        myList.push(0);\n        myList.push(1);\n        myList.push(1);\n        expect(myList.binaryToDecimal()).toEqual(11);\n    });\n\n    it(\"should convert another list with multiple elements correctly\", function() {\n        const myList = new LinkedList(1);\n        myList.push(1);\n        myList.push(0);\n        myList.push(0);\n        expect(myList.binaryToDecimal()).toEqual(12);\n    });\n    \n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        let output = \"\";\n        if (temp === null) {\n            console.log(\"empty\");\n            return;\n        }\n        while (temp !== null) {\n            output += String(temp.value);\n            temp = temp.next;\n            if (temp !== null) {\n                output += \" -> \";\n            }\n        }\n        console.log(output);\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.length = 0;\n    }\n \n\tpush(value) {\n\t\tconst newNode = new Node(value);\n\t\tif (!this.head) {\n\t\t\tthis.head = newNode;\n\t\t} else {\n\t\t\tlet current = this.head;\n\t\t\twhile (current.next !== null) {\n\t\t\t\tcurrent = current.next;\n\t\t\t}\n\t\t\tcurrent.next = newNode;\n\t\t}\n\t\tthis.length++;\n\t}\n\t\n    binaryToDecimal() {\n        let num = 0;\n        let current = this.head;\n        while (current !== null) {\n            num = num * 2 + current.value;\n            current = current.next;\n        }\n        return num;\n    }\n\t\n}\n\n\n\n\n\n// ---------------\n// Convert 1011 to 11\n// ---------------\nconst list1 = new LinkedList(1);\nlist1.push(0);\nlist1.push(1);\nlist1.push(1);\nconsole.log(\"Convert 1011 to 11:\");\nconsole.log(\"Input: 1 -> 0 -> 1 -> 1\");\nconsole.log(\"Output: \", list1.binaryToDecimal());\nconsole.log(\"---------------\");\n\n// ---------------\n// Convert 1100 to 12\n// ---------------\nconst list2 = new LinkedList(1);\nlist2.push(1);\nlist2.push(0);\nlist2.push(0);\nconsole.log(\"Convert 1100 to 12:\");\nconsole.log(\"Input: 1 -> 1 -> 0 -> 0\");\nconsole.log(\"Output: \", list2.binaryToDecimal());\nconsole.log(\"---------------\");\n\n// ---------------\n// Convert 1 to 1\n// ---------------\nconst list3 = new LinkedList(1);\nconsole.log(\"Convert 1 to 1:\");\nconsole.log(\"Input: 1\");\nconsole.log(\"Output: \", list3.binaryToDecimal());\nconsole.log(\"---------------\");\n\n// ---------------\n// Convert empty list to 0\n// ---------------\nconst list4 = new LinkedList(0);\nlist4.makeEmpty();\nconsole.log(\"Convert empty list to 0:\");\nconsole.log(\"Input: empty\");\nconsole.log(\"Output: \", list4.binaryToDecimal());\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

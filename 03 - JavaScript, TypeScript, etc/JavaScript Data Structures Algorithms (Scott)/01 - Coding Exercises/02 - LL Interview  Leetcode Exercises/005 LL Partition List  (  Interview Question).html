@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "005 LL Partition List  (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p><strong>\u26a0\ufe0f CAUTION: Advanced Challenge Ahead!<br><br></strong>This Linked List problem is significantly more challenging than the ones we've tackled so far. It's common for students at this stage to find this exercise demanding, so don't worry if you're not ready to tackle it yet. It's perfectly okay to set it aside and revisit it later when you feel more confident.<br><br>If you decide to take on this challenge, I strongly advise using a hands-on approach: grab a piece of paper and visually map out each step. <br><br>This problem requires a clear understanding of how elements in a Linked List interact and move. By now, you've observed numerous Linked List animations in the course, which have prepared you for this moment. <br><br>This exercise will be a true test of your ability to apply those concepts practically. Remember, patience and persistence are key here!<br><br><strong>Now, here is the exercise:</strong><br><br>___________________________________</p><p><br></p><p>Implement a member function called <code><strong>partitionList(x)</strong></code> that partitions the linked list such that all nodes with values less than <code><strong>x</strong></code> come before nodes with values greater than or equal to <code><strong>x</strong></code>.&nbsp; <br><br><strong>Note: this linked list class does not have a tail which will make this method easier to implement.</strong><br><br>The original relative order of the nodes should be preserved.</p><p><br></p><p>Input:</p><ul><li><p>An integer <code><strong>x</strong></code>, the partition value.</p></li></ul><p><br></p><p>Output:</p><ul><li><p>The function should modify the linked list in-place, such that all nodes with values less than <code><strong>x</strong></code> come before nodes with values greater than or equal to <code><strong>x</strong></code>.&nbsp; </p></li></ul><p><br></p><p>Constraints:</p><ul><li><p>You are not allowed to use any additional data structures (such as arrays) or modify the existing data structure.</p></li><li><p>You can only traverse the linked list once.</p></li><li><p>You can create temporary nodes to make the implementation simpler.</p></li></ul><p><br></p><p><br></p><p>Example 1:</p><p><strong>Input:</strong></p><p>Linked List: <code><strong>3 -&gt; 8 -&gt; 5 -&gt; 10 -&gt; 2 -&gt; 1</strong></code> x: <code><strong>5</strong></code></p><p><strong>Process:</strong></p><ul><li><p>Values less than 5: <code><strong>3</strong></code>, <code><strong>2</strong></code>, <code><strong>1</strong></code></p></li><li><p>Values greater than or equal to 5: <code><strong>8</strong></code>, <code><strong>5</strong></code>, <code><strong>10</strong></code></p></li></ul><p><strong>Output:</strong></p><p>Linked List: <code><strong>3 -&gt; 2 -&gt; 1 -&gt; 8 -&gt; 5 -&gt; 10</strong></code></p><p><br></p><p><br></p><p>Example 2:<br><strong>Input:</strong></p><p>Linked List: <code><strong>1 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 5 -&gt; 2</strong></code> x: <code><strong>3</strong></code></p><p><strong>Process:</strong></p><ul><li><p>Values less than 3: <code><strong>1</strong></code>, <code><strong>2</strong></code>, <code><strong>2</strong></code></p></li><li><p>Values greater than or equal to 3: <code><strong>4</strong></code>, <code><strong>3</strong></code>, <code><strong>5</strong></code></p></li></ul><p><strong>Output:</strong></p><p>Linked List: <code><strong>1 -&gt; 2 -&gt; 2 -&gt; 4 -&gt; 3 -&gt; 5</strong></code></p><p><br></p><p><br></p><p><strong>Tips:</strong></p><ol><li><p>While traversing the linked list, maintain two separate chains: one for values less than <code><strong>x</strong></code> and one for values greater than or equal to <code><strong>x</strong></code>.</p></li><li><p>Use dummy nodes to simplify the handling of the heads of these chains.</p></li><li><p>After processing the entire list, connect the two chains to get the desired arrangement.</p></li></ol><p><br></p><p><strong>Note:</strong></p><p>The solution must maintain the relative order of nodes. For instance, in the first example, even though <code><strong>8</strong></code> appears before <code><strong>5</strong></code> in the original list, the partitioned list must still have <code><strong>8</strong></code> before <code><strong>5</strong></code> as their relative order remains unchanged.<br><br><strong>Note:</strong> </p><p>You must solve the problem <strong>WITHOUT MODIFYING THE VALUES</strong> in the list's nodes (i.e., only the nodes' <code><strong>next</strong></code> pointers may be changed.)</p><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-02_19-56-26-d7042867dba13e68c3510c0146fbe835.png\"></p>", "tests": [{"file_name": "evaluate.js", "content": "// Validate partitionList on an empty list\nit('confirms no changes on an empty list', () => {\n    const list = new LinkedList(1);\n    list.makeEmpty();\n    list.partitionList(1);\n    expect(list.length).toBe(0);\n});\n\n// Validate single-element list remains unchanged\nit('confirms single-element list remains unchanged', () => {\n    const list = new LinkedList(1);\n    list.partitionList(1);\n    expect(list.length).toBe(1);\n});\n\n// Validate all nodes smaller than partition\nit('confirms unchanged list when all values < partition', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.partitionList(4);\n    expect(list.length).toBe(3);\n});\n\n// Validate all nodes greater than partition\nit('confirms unchanged list when all values > partition', () => {\n    const list = new LinkedList(4);\n    list.push(5);\n    list.push(6);\n    list.partitionList(3);\n    expect(list.length).toBe(3);\n});\n\n// Validate nodes partitioned correctly\nit('confirms correct partitioning with mixed values', () => {\n    const list = new LinkedList(3);\n    list.push(1);\n    list.push(4);\n    list.push(2);\n    list.partitionList(3);\n    let current = list.head;\n    let passedPartition = false;\n    while (current !== null) {\n        if (current.value >= 3) passedPartition = true;\n        if (passedPartition && current.value < 3) {\n            fail('Nodes not partitioned correctly');\n        }\n        current = current.next;\n    }\n    expect(true).toBe(true);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        let output = \"\";\n        if (temp === null) {\n            console.log(\"empty\");\n            return;\n        }\n        while (temp !== null) {\n            output += String(temp.value);\n            temp = temp.next;\n            if (temp !== null) {\n                output += \" -> \";\n            }\n        }\n        console.log(output);\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.length = 0;\n    }\n \n\tpush(value) {\n\t\tconst newNode = new Node(value);\n\t\tif (!this.head) {\n\t\t\tthis.head = newNode;\n\t\t} else {\n\t\t\tlet current = this.head;\n\t\t\twhile (current.next !== null) {\n\t\t\t\tcurrent = current.next;\n\t\t\t}\n\t\t\tcurrent.next = newNode;\n\t\t}\n\t\tthis.length++;\n\t}\n\t\n    partitionList(x) {\n        if (this.head === null) return;\n    \n        const dummy1 = new Node(0);\n        const dummy2 = new Node(0);\n        let prev1 = dummy1;\n        let prev2 = dummy2;\n        let current = this.head;\n    \n        while (current !== null) {\n            if (current.value < x) {\n                prev1.next = current;\n                prev1 = current;\n            } else {\n                prev2.next = current;\n                prev2 = current;\n            }\n            current = current.next;\n        }\n    \n        prev2.next = null;\n        prev1.next = dummy2.next;\n    \n        this.head = dummy1.next;\n    }\n\n}\n\n\n\n\n\n//  +=====================================================+\n//  |                                                     |\n//  |          THE TEST CODE BELOW WILL PRINT             |\n//  |              OUTPUT TO \"USER LOGS\"                  |\n//  |                                                     |\n//  |  Use the output to test and troubleshoot your code  |\n//  |                                                     |\n//  +=====================================================+\n\n\n// Helper function to create list from array\nfunction createListFromArray(arr) {\n    const ll = new LinkedList(arr[0]);\n    for (let i = 1; i < arr.length; i++) {\n        ll.push(arr[i]);\n    }\n    return ll;\n}\n\n// Helper function to compare list with array\nfunction listMatchesArray(ll, arr) {\n    let temp = ll.head;\n    let i = 0;\n    while (temp !== null && i < arr.length) {\n        if (temp.value !== arr[i]) {\n            return false;\n        }\n        temp = temp.next;\n        i++;\n    }\n    return (temp === null && i === arr.length);\n}\n\n// Function to run a single test\nfunction runTest(testNum, description, ll, x, expectedArr) {\n    console.log(\"---------------------------------------\");\n    console.log(`Test ${testNum}: ${description}`);\n    console.log(\"BEFORE: \");\n    ll.printList();\n    console.log(\"PARTITION: \" + x);\n    ll.partitionList(x);\n    console.log(\"AFTER: \");\n    ll.printList();\n    console.log(listMatchesArray(ll, expectedArr) ? \"PASS\" : \"FAIL\");\n}\n\n\n// Test 1: Basic partition\nlet ll1 = createListFromArray([1, 4, 3, 2, 5, 2]);\nrunTest(1, \"Basic partition\", ll1, 3, [1, 2, 2, 4, 3, 5]);\n\n// Test 2: No elements to partition\nlet ll2 = createListFromArray([4, 5, 6]);\nrunTest(2, \"No elements to partition\", ll2, 3, [4, 5, 6]);\n\n// Test 3: All elements smaller\nlet ll3 = createListFromArray([1, 2, 2]);\nrunTest(3, \"All elements smaller\", ll3, 3, [1, 2, 2]);\n\n// Test 4: Single-element list\nlet ll4 = createListFromArray([1]);\nrunTest(4, \"Single-element list\", ll4, 3, [1]);\n\n// Test 5: All elements equal to partition\nlet ll5 = createListFromArray([3, 3, 3]);\nrunTest(5, \"All elements equal to partition\", ll5, 3, [3, 3, 3]);\n\nconsole.log(\"---------------------------------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

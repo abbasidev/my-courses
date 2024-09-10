@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./bootstrap.css" rel="stylesheet" />
+    <title>Note Manager App</title>
+    <style>
+      * {
+        font-family: Calibri, Tahoma;
+      }
+      html {
+        font-size: 18px;
+      }
+      .wrapper {
+        width: 800px;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <form class="bg-light p-2 my-5" id="form">
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control shadow-none" id="input" />
+          <button type="submit" class="btn btn-primary">افزودن</button>
+        </div>
+      </form>
+
+      <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th style="width: 80px">شناسه</th>
+            <th>یادداشت</th>
+            <th style="width: 80px">حذف</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

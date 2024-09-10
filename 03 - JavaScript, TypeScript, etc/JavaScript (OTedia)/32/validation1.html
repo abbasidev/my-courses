@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Validation - Part 1</title>
+    <style>
+      * {
+        font-size: 20px;
+        font-family: Calibri;
+        direction: rtl;
+      }
+      input {
+        direction: ltr;
+      }
+      label {
+        display: inline-block;
+        width: 90px;
+      }
+      .red {
+        color: red;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form id="form1">
+        <label>نام کاربری</label>
+        <input type="text" name="user" id="user" /><span class="red"></span
+        ><br /><br />
+        <label>کلمه‌ی عبور</label>
+        <input type="password" name="pass" id="pass" /><span class="red"></span
+        ><br /><br />
+        <button type="submit">ورود</button>
+      </form>
+
+      <br />
+      <hr />
+      <br />
+
+      <form id="form2">
+        <label>سال تولد</label>
+        <input type="text" name="year" id="year" /><span class="red"></span
+        ><br /><br />
+        <button type="submit">ارسال</button>
+      </form>
+    </div>
+    <script src="validation1.js"></script>
+  </body>
+</html>

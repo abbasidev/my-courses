@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Validation - Part 2</title>
+    <style>
+      * {
+        font-size: 20px;
+        font-family: Calibri;
+        direction: rtl;
+      }
+      input {
+        direction: ltr;
+      }
+      label {
+        display: inline-block;
+        width: 90px;
+      }
+      .red {
+        color: red;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form id="form1">
+        <label>سال تولد</label>
+        <input type="text" name="year" id="year" /><span class="red"></span
+        ><br /><br />
+        <button type="submit">ارسال</button>
+      </form>
+
+      <br />
+      <hr />
+      <br />
+
+      <form id="form2">
+        <label>ایمیل</label>
+        <input type="text" name="email" id="email" /><span class="red"></span
+        ><br /><br />
+        <button type="submit">ارسال</button>
+      </form>
+    </div>
+    <script src="validation2.js"></script>
+  </body>
+</html>

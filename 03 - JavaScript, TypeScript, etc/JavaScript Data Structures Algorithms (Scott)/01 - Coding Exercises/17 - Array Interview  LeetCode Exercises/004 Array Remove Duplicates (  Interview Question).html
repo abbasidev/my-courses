@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "004 Array Remove Duplicates (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The <code><strong>removeDuplicates</strong></code> function aims to remove duplicates from a sorted array of integers (<code><strong>nums</strong></code>) and returns the new length of the array. <br><br>The function modifies the input array in-place such that each element appears only once and returns the new length.</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The input array is sorted in ascending order.</p></li><li><p>The array can be empty or contain any number of elements.</p></li><li><p>Elements in the array are integers.</p></li><li><p>The function should not allocate extra space; it must do this by modifying the input array in-place (this means you cannot use another data structure like a set).</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>nums</strong></code>: A sorted array of integers.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>The function returns the new length of the array after removing duplicates.</p></li><li><p>If <code><strong>nums</strong></code> is empty, the function returns <code><strong>0</strong></code>.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let nums = [1, 1, 2];\nlet result = removeDuplicates(nums);\n// The function should return 2\n// The nums array should be modified to [1, 2]\n</pre></li><li><p><strong>Array with All Duplicates</strong></p><pre class=\"prettyprint linenums\">let nums = [1, 1, 1, 1];\nlet result = removeDuplicates(nums);\n// The function should return 1\n// The nums array should be modified to [1]\n</pre></li><li><p><strong>Array with No Duplicates</strong></p><pre class=\"prettyprint linenums\">let nums = [1, 2, 3, 4];\nlet result = removeDuplicates(nums);\n// The function should return 4\n// The nums array should remain [1, 2, 3, 4]\n</pre></li><li><p><strong>Array with Multiple Sets of Duplicates</strong></p><pre class=\"prettyprint linenums\">let nums = [1, 1, 2, 2, 3];\nlet result = removeDuplicates(nums);\n// The function should return 3\n// The nums array should be modified to [1, 2, 3]\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">let nums = [];\nlet result = removeDuplicates(nums);\n// The function should return 0\n// The nums array should remain empty\n</pre></li></ol><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-07-35-b19499edb09515a44fdc986cf5b99311.png\"></p><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('removeDuplicates', () => {\n\n    // Test empty array\n    it('should return 0 for an empty array', () => {\n        let arr = [];\n        expect(removeDuplicates(arr)).toBe(0);\n    });\n\n    // Test array with a single element\n    it('should return 1 for a single-element array', () => {\n        let arr = [1];\n        expect(removeDuplicates(arr)).toBe(1);\n    });\n\n    // Test array with no duplicates\n    it('should return the same length for array with unique elements', () => {\n        let arr = [1, 2, 3, 4];\n        expect(removeDuplicates(arr)).toBe(4);\n    });\n\n    // Test array with all duplicates\n    it('should return 1 for an array with all duplicates', () => {\n        let arr = [2, 2, 2, 2];\n        expect(removeDuplicates(arr)).toBe(1);\n    });\n\n    // Test array with some duplicates\n    it('should return correct length after removing duplicates', () => {\n        let arr = [1, 2, 2, 3, 4, 4];\n        expect(removeDuplicates(arr)).toBe(4);\n    });\n\n    // Test array with duplicate at start\n    it('should handle duplicates at the start correctly', () => {\n        let arr = [1, 1, 2, 3];\n        expect(removeDuplicates(arr)).toBe(3);\n    });\n\n    // Test array with duplicate at end\n    it('should handle duplicates at the end correctly', () => {\n        let arr = [1, 2, 3, 3];\n        expect(removeDuplicates(arr)).toBe(3);\n    });\n    \n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function removeDuplicates(nums) {\n    if (nums.length === 0) {\n        return 0;\n    }\n\n    let writePointer = 1;\n\n    for (let readPointer = 1; readPointer < nums.length; readPointer++) {\n        if (nums[readPointer] !== nums[readPointer - 1]) {\n            nums[writePointer] = nums[readPointer];\n            writePointer++;\n        }\n    }\n\n    return writePointer;\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array with no duplicates\n// ------------------------------------\nlet noDups = [1, 2, 3, 4];\nconsole.log(\"Test array with no duplicates:\");\nconsole.log(\"Before:\", noDups);\nlet lenNoDups = removeDuplicates(noDups);\nconsole.log(\"After:\", noDups.slice(0, lenNoDups));\nconsole.log(\"Length:\", lenNoDups);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with duplicates\n// ------------------------------------\nlet withDups = [1, 1, 2, 2, 3];\nconsole.log(\"Test array with duplicates:\");\nconsole.log(\"Before:\", withDups);\nlet lenWithDups = removeDuplicates(withDups);\nconsole.log(\"After:\", withDups.slice(0, lenWithDups));\nconsole.log(\"Length:\", lenWithDups);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test empty array\n// ------------------------------------\nlet emptyArr = [];\nconsole.log(\"Test empty array:\");\nconsole.log(\"Before:\", emptyArr);\nlet lenEmpty = removeDuplicates(emptyArr);\nconsole.log(\"After:\", emptyArr.slice(0, lenEmpty));\nconsole.log(\"Length:\", lenEmpty);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all same numbers\n// ------------------------------------\nlet allSame = [3, 3, 3];\nconsole.log(\"Test array with all same numbers:\");\nconsole.log(\"Before:\", allSame);\nlet lenAllSame = removeDuplicates(allSame);\nconsole.log(\"After:\", allSame.slice(0, lenAllSame));\nconsole.log(\"Length:\", lenAllSame);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with negative numbers\n// ------------------------------------\nlet negNumbers = [-1, -1, 0, 2, 2];\nconsole.log(\"Test array with negative numbers:\");\nconsole.log(\"Before:\", negNumbers);\nlet lenNeg = removeDuplicates(negNumbers);\nconsole.log(\"After:\", negNumbers.slice(0, lenNeg));\nconsole.log(\"Length:\", lenNeg);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with one element\n// ------------------------------------\nlet singleElem = [1];\nconsole.log(\"Test array with one element:\");\nconsole.log(\"Before:\", singleElem);\nlet lenSingle = removeDuplicates(singleElem);\nconsole.log(\"After:\", singleElem.slice(0, lenSingle));\nconsole.log(\"Length:\", lenSingle);\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

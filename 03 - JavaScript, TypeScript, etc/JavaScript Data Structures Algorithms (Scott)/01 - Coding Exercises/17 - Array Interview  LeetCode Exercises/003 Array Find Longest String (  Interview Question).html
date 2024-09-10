@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "003 Array Find Longest String (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The <code><strong>findLongestString</strong></code> function aims to find the longest string from an array of strings (<code><strong>stringArray</strong></code>). <br><br>The function returns the longest string present in the given array.</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The array can be empty or contain any number of elements.</p></li><li><p>Elements in the array must be strings.</p></li><li><p>If there are multiple strings of the same longest length, the function returns the first one it encounters.</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>stringArray</strong></code>: An array of strings.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>The function returns the longest string from the array <code><strong>stringArray</strong></code>.</p></li><li><p>If <code><strong>stringArray</strong></code> is empty, the function returns an empty string <code><strong>\"\"</strong></code>.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let myStrings = [\"apple\", \"banana\", \"pea\"];\nlet result = findLongestString(myStrings);\n// The function should return \"banana\"\n</pre></li><li><p><strong>Array with Single Character Strings</strong></p><pre class=\"prettyprint linenums\">let myStrings = [\"a\", \"b\", \"c\"];\nlet result = findLongestString(myStrings);\n// The function should return \"a\"\n</pre></li><li><p><strong>Array with Multiple Longest Strings</strong></p><pre class=\"prettyprint linenums\">let myStrings = [\"orange\", \"cherry\", \"banana\"];\nlet result = findLongestString(myStrings);\n// The function should return \"orange\"\n</pre></li><li><p><strong>Array with Empty Strings</strong></p><pre class=\"prettyprint linenums\">let myStrings = [\"\", \"\", \"\"];\nlet result = findLongestString(myStrings);\n// The function should return \"\"\n</pre></li><li><p><strong>Array with Mixed Length Strings</strong></p><pre class=\"prettyprint linenums\">let myStrings = [\"apple\", \"a\", \"banana\", \"bb\"];\nlet result = findLongestString(myStrings);\n// The function should return \"banana\"\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">let myStrings = [];\nlet result = findLongestString(myStrings);\n// The function should return \"\"\n</pre></li></ol><p><br></p><p>Note: The function assumes that the array contains strings. If you expect to encounter non-string elements, you should handle that separately before calling <code><strong>findLongestString</strong></code>.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-06-30-e50acd184d12e45b649e5b4907df67fe.png\"><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('findLongestString', () => {\n    \n    // Test empty array\n    it('should return an empty string for an empty array', () => {\n        let arr = [];\n        expect(findLongestString(arr)).toBe('');\n    });\n\n    // Test array with a single element\n    it('should return the single string for a single-element array', () => {\n        let arr = ['hello'];\n        expect(findLongestString(arr)).toBe('hello');\n    });\n\n    // Test array with multiple elements of the same length\n    it('should return the first string when all have the same length', () => {\n        let arr = ['abc', 'def', 'ghi'];\n        expect(findLongestString(arr)).toBe('abc');\n    });\n\n    // Test array with one longer string\n    it('should return the longest string', () => {\n        let arr = ['a', 'abc', 'ab'];\n        expect(findLongestString(arr)).toBe('abc');\n    });\n\n    // Test array with empty strings\n    it('should return an empty string if array only has empty strings', () => {\n        let arr = ['', '', ''];\n        expect(findLongestString(arr)).toBe('');\n    });\n\n    // Test array with empty and non-empty strings\n    it('should return the longest non-empty string', () => {\n        let arr = ['', 'a', ''];\n        expect(findLongestString(arr)).toBe('a');\n    });\n\n    // Test array with strings of varying lengths\n    it('should return the longest string for mixed lengths', () => {\n        let arr = ['short', 'very very long', 'medium'];\n        expect(findLongestString(arr)).toBe('very very long');\n    });\n    \n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function findLongestString(stringArray) {\n    let longestString = \"\";\n    for (let str of stringArray) {\n        if (str.length > longestString.length) {\n            longestString = str;\n        }\n    }\n    return longestString;\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array with short strings\n// ------------------------------------\nlet shortStrs = [\"hi\", \"yo\", \"hey\"];\nconsole.log(\"Test array with short strings:\");\nconsole.log(\"Array:\", shortStrs);  // Should print: [\"hi\", \"yo\", \"hey\"]\nlet resultShort = findLongestString(shortStrs);\nconsole.log(\"Longest String:\", resultShort);  // Should print: \"hey\"\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with long strings\n// ------------------------------------\nlet longStrs = [\"hello\", \"goodbye\", \"supercalifragilisticexpialidocious\"];\nconsole.log(\"Test array with long strings:\");\nconsole.log(\"Array:\", longStrs);  // Should print: [\"hello\", \"goodbye\", \"supercalifragilisticexpialidocious\"]\nlet resultLong = findLongestString(longStrs);\nconsole.log(\"Longest String:\", resultLong);  // Should print: \"supercalifragilisticexpialidocious\"\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with varying length strings\n// ------------------------------------\nlet variedStrs = [\"short\", \"longer\", \"longest\"];\nconsole.log(\"Test array with varying length strings:\");\nconsole.log(\"Array:\", variedStrs);  // Should print: [\"short\", \"longer\", \"longest\"]\nlet resultVaried = findLongestString(variedStrs);\nconsole.log(\"Longest String:\", resultVaried);  // Should print: \"longest\"\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all same length strings\n// ------------------------------------\nlet sameStrs = [\"same\", \"size\", \"test\"];\nconsole.log(\"Test array with all same length strings:\");\nconsole.log(\"Array:\", sameStrs);  // Should print: [\"same\", \"size\", \"test\"]\nlet resultSame = findLongestString(sameStrs);\nconsole.log(\"Longest String:\", resultSame);  // Should print: \"same\" (or \"size\" or \"test\")\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with one string\n// ------------------------------------\nlet oneStr = [\"single\"];\nconsole.log(\"Test array with one string:\");\nconsole.log(\"Array:\", oneStr);  // Should print: [\"single\"]\nlet resultOne = findLongestString(oneStr);\nconsole.log(\"Longest String:\", resultOne);  // Should print: \"single\"\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with empty strings\n// ------------------------------------\nlet emptyStrs = [\"\", \"\", \"\"];\nconsole.log(\"Test array with empty strings:\");\nconsole.log(\"Array:\", emptyStrs);  // Should print: [\"\", \"\", \"\"]\nlet resultEmpty = findLongestString(emptyStrs);\nconsole.log(\"Longest String:\", resultEmpty);  // Should print: \"\"\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with numbers as strings\n// ------------------------------------\nlet numStrs = [\"123\", \"1234\", \"12\"];\nconsole.log(\"Test array with numbers as strings:\");\nconsole.log(\"Array:\", numStrs);  // Should print: [\"123\", \"1234\", \"12\"]\nlet resultNum = findLongestString(numStrs);\nconsole.log(\"Longest String:\", resultNum);  // Should print: \"1234\"\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "002 HT Set", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Write the <code><strong>set</strong></code> method</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Set a key-value pair in an empty HashTable\nit('should set a key-value pair in an empty HashTable', () => {\n  const ht = new HashTable();\n  ht.set('apple', 1);\n  const index = ht._hash('apple');\n  expect(ht.dataMap[index][0]).toEqual(['apple', 1]);\n});\n\n// Test 2: Set multiple key-value pairs\nit('should set multiple key-value pairs', () => {\n  const ht = new HashTable();\n  ht.set('apple', 1).set('banana', 2);\n  const appleIndex = ht._hash('apple');\n  const bananaIndex = ht._hash('banana');\n  expect(ht.dataMap[appleIndex][0]).toEqual(['apple', 1]);\n  expect(ht.dataMap[bananaIndex][0]).toEqual(['banana', 2]);\n});\n\n// Test 3: Handle collision\nit('should handle collision correctly', () => {\n  const ht = new HashTable(1); // Force collision\n  ht.set('apple', 1).set('banana', 2);\n  const index = ht._hash('apple');\n  expect(ht.dataMap[index]).toEqual([['apple', 1], ['banana', 2]]);\n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "class HashTable {\n    constructor(size = 7) {\n        this.dataMap = new Array(size);\n    }\n   \n    _hash(key) {\n        let hash = 0;\n        for (let i = 0; i < key.length; i++) {\n            hash = (hash + key.charCodeAt(i) * 23) % this.dataMap.length;\n        }\n        return hash;\n    }\n\n    printTable() {\n        for (let i = 0; i < this.dataMap.length; i++) {\n            console.log(i, \": \", this.dataMap[i]);\n        }\n    }\n\n    set(key,value) {\n        let index = this._hash(key);\n        if (!this.dataMap[index]) this.dataMap[index] = [];\n        \n        this.dataMap[index].push([key, value]);\n        return this;\n    }\n\n}\n\n\n\nlet myHashTable = new HashTable();\n\nmyHashTable.set(\"nails\", 100);\nmyHashTable.set(\"tile\", 50);\nmyHashTable.set(\"lumber\", 80);\nmyHashTable.set(\"bolts\", 200);\nmyHashTable.set(\"screws\", 140);\n\nmyHashTable.printTable();    \n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    0 :  undefined\n    1 :  undefined\n    2 :  undefined\n    3 :  [ [ 'screws', 140 ] ]\n    4 :  [ [ 'bolts', 200 ] ]\n    5 :  undefined\n    6 :  [ [ 'nails', 100 ], [ 'tile', 50 ], [ 'lumber', 80 ] ]\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

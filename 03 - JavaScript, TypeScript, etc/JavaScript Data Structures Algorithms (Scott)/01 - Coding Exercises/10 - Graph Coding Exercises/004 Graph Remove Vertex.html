@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "004 Graph Remove Vertex", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Write the <code><strong>removeVertex</strong></code> method</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Remove an existing vertex\nit('should remove vertex A and all its connections', () => {\n  const g = new Graph();\n  g.addVertex('A');\n  g.addVertex('B');\n  g.addEdge('A', 'B');\n  g.removeVertex('A');\n  expect(g.adjacencyList).toEqual({ 'B': [] });\n});\n\n// Test 2: Remove a vertex that does not exist\nit('should return undefined when removing a vertex that does not exist', () => {\n  const g = new Graph();\n  expect(g.removeVertex('C')).toBeUndefined();\n  expect(g.adjacencyList).toEqual({});\n});\n\n// Test 3: Remove vertex that is self-connected\nit('should remove vertex A that is connected to itself', () => {\n  const g = new Graph();\n  g.addVertex('A');\n  g.addEdge('A', 'A');\n  g.removeVertex('A');\n  expect(g.adjacencyList).toEqual({});\n});\n\n// Test 4: Remove multiple vertices\nit('should remove multiple vertices', () => {\n  const g = new Graph();\n  g.addVertex('A');\n  g.addVertex('B');\n  g.addVertex('C');\n  g.addEdge('A', 'B');\n  g.addEdge('B', 'C');\n  g.removeVertex('A');\n  g.removeVertex('C');\n  expect(g.adjacencyList).toEqual({ 'B': [] });\n});\n\n// Test 5: Remove vertex that has multiple connections\nit('should remove vertex A that is connected to multiple vertices', () => {\n  const g = new Graph();\n  g.addVertex('A');\n  g.addVertex('B');\n  g.addVertex('C');\n  g.addEdge('A', 'B');\n  g.addEdge('A', 'C');\n  g.removeVertex('A');\n  expect(g.adjacencyList).toEqual({ 'B': [], 'C': [] });\n});\n\n"}], "solutions": [{"file_name": "index.js", "content": "class Graph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n\n    printGraph() {\n      const keys = Object.keys(this.adjacencyList);\n      const len = keys.length;\n      if (len === 0) {\n        console.log(\"{}\");\n        return;\n      }\n      console.log(\"{\");\n      keys.forEach((vertex, i) => {\n        const adjacentVertices = this.adjacencyList[vertex];\n        const comma = (i === len - 1) ? \"\" : \",\";\n        console.log(`  ${vertex}: [${adjacentVertices.join(\", \")}]${comma}`);\n      });\n      console.log(\"}\");\n    }\n\n    addVertex(vertex) {\n        if(!this.adjacencyList[vertex]) {\n            this.adjacencyList[vertex] = [];\n            return true;\n        }\n        return false;\n    }\n\n    addEdge(vertex1, vertex2) {\n        if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {\n            this.adjacencyList[vertex1].push(vertex2);\n            this.adjacencyList[vertex2].push(vertex1);\n            return true;\n        }\n        return false;\n    }\n\n    removeEdge(vertex1, vertex2) {\n        if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {\n            this.adjacencyList[vertex1] = this.adjacencyList[vertex1]\n                .filter(v => v !== vertex2);\n            this.adjacencyList[vertex2] = this.adjacencyList[vertex2]\n                .filter(v => v !== vertex1);\n            return true;\n        }\n        return false;\n    }\n\n    removeVertex(vertex) {\n        if (!this.adjacencyList[vertex]) return undefined;\n        while(this.adjacencyList[vertex].length) {\n            let temp = this.adjacencyList[vertex].pop();\n            this.removeEdge(vertex, temp);\n        }  \n        delete this.adjacencyList[vertex];\n        return this;\n    }\n}\n\n\n\nlet myGraph = new Graph();\n\nmyGraph.addVertex(\"A\");\nmyGraph.addVertex(\"B\");\nmyGraph.addVertex(\"C\");\nmyGraph.addVertex(\"D\");\nmyGraph.addEdge(\"A\", \"B\");\nmyGraph.addEdge(\"A\", \"C\");\nmyGraph.addEdge(\"A\", \"D\");\nmyGraph.addEdge(\"B\", \"D\");\nmyGraph.addEdge(\"C\", \"D\");\n\nmyGraph.printGraph();\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

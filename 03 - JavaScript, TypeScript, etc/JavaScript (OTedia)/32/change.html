@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Change Events</title>
+    <style>
+      * {
+        font-size: 20px;
+        font-family: Tahoma;
+      }
+      label {
+        display: inline-block;
+        width: 100px;
+        vertical-align: middle;
+      }
+      .red {
+        color: red;
+      }
+      textarea {
+        width: 300px;
+        height: 120px;
+        resize: none;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form>
+        <label>Text Field</label>
+        <input type="text" name="text" id="text" /><span class="red"></span
+        ><br /><br />
+        <label>Checkbox</label>
+        <input type="checkbox" name="check" id="check" /><span
+          class="red"
+        ></span
+        ><br /><br />
+        <label>Text Area</label>
+        <textarea name="textarea" id="textarea"></textarea
+        ><span class="red"></span><br /><br />
+        <label>Dropdown</label>
+        <select name="select" id="select">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <span class="red"></span><br /><br />
+      </form>
+    </div>
+    <script src="change.js"></script>
+  </body>
+</html>

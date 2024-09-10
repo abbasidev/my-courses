@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "008 LL Reverse Between (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p><strong>\u26a0\ufe0f Advanced Challenge Alert: Linked List Mastery!<br><br></strong>Welcome to what many consider the pinnacle of Linked List challenges in this course! This exercise is not just a test of your coding skills, but also a measure of your problem-solving ability and understanding of complex data structures.<br><br><strong>Here's how you can tackle it:</strong></p><ol><li><p><strong>Visualize the Problem:</strong> Before diving into coding, grab a pen and paper. Sketch out the linked list and visualize each step of the process. This approach isn't just for beginners; it's exactly how seasoned developers plan their attack on complex problems.</p></li><li><p><strong>Seek Understanding Over Speed:</strong> Take your time to really grasp each part of the problem. The goal here is deep understanding, not just a quick solution. If you find yourself stuck, that's a part of the learning process.</p></li><li><p><strong>It's Okay to Take a Break:</strong> Feel free to step away from this challenge and return later. This course is designed to equip you with a growing set of skills, and sometimes, a bit of distance can bring new insights.</p></li><li><p><strong>Approach Like a Pro:</strong> Remember, facing a challenging problem is what being a professional developer is all about. Use this exercise to think, plan, and code like a pro.</p></li></ol><p><br></p><p><strong>Now, let's dive into the exercise:<br></strong><br>___________________________________</p><p><br></p><p>Implement a member function called <code><strong>reverseBetween(m, n)</strong></code> that reverses the nodes between indexes (using 0-based indexing)&nbsp; <code><strong>m</strong></code> and <code><strong>n</strong></code> (inclusive) in the linked list.<br><br><strong>Note: this linked list class does NOT have a </strong><code><strong>tail</strong></code><strong> which will make this method easier to implement.<br><br>Assumption</strong>: You can assume that <code><strong>m</strong></code> and <code><strong>n</strong></code> are not out of bounds.</p><p><br></p><p>Output:</p><ul><li><p>The function should reverse the nodes between the indexes <code><strong>m</strong></code> and <code><strong>n</strong></code> in the linked list. The reversal should be done in-place.</p></li></ul><p><br></p><p>Constraints:</p><ul><li><p>You are not allowed to use any additional data structures (such as arrays) or modify the existing data structure.</p></li><li><p>You can only traverse the linked list once.</p></li></ul><p><br></p><p><br></p><p>Example 1:</p><p>Suppose you have a LinkedList object, list, with the following values:<br> 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</p><p><br>After calling the <code><strong>reverseBetween(1, 3)</strong></code> function:</p><pre class=\"prettyprint linenums\">list.reverseBetween(1, 3);\n</pre><p>The linked list should now have the following values: <br>1 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 5</p><p><br></p><p><br></p><p>Example 2:</p><p>Now suppose you have a LinkedList object, list, with the following values:<br> 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6</p><p><br>After calling the <code><strong>reverseBetween(3, 5)</strong></code> function:</p><pre class=\"prettyprint linenums\">list.reverseBetween(3, 5);\n</pre><p>The linked list should now have the following values: <br>1 -&gt; 2 -&gt; 3 -&gt; 6 -&gt; 5 -&gt; 4</p><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-02_19-56-17-249206bef6262c1c476b25936f990db9.png\"></p>", "tests": [{"file_name": "evaluate.js", "content": "// Validate reverseBetween on an empty list\nit('confirms no changes on an empty list', () => {\n    const list = new LinkedList(1);\n    list.makeEmpty();\n    list.reverseBetween(0, 1);\n    expect(list.length).toBe(0);\n});\n\n// Validate single-element list remains unchanged\nit('confirms single-element list remains unchanged', () => {\n    const list = new LinkedList(1);\n    list.reverseBetween(0, 0);\n    expect(list.length).toBe(1);\n});\n\n// Validate that the head is changed when reversed\nit('confirms head change when reverse includes head', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.reverseBetween(0, 1);\n    expect(list.head.value).toBe(2);\n});\n\n// Validate that the tail is changed when reversed\nit('confirms tail change when reverse includes tail', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.reverseBetween(1, 2);\n    let current = list.head;\n    while (current.next !== null) {\n        current = current.next;\n    }\n    expect(current.value).toBe(2);\n});\n\n// Validate that nodes are reversed correctly\nit('confirms nodes reversed between m and n', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.push(4);\n    list.push(5);\n    list.reverseBetween(1, 3);\n    const values = [];\n    let current = list.head;\n    while (current !== null) {\n        values.push(current.value);\n        current = current.next;\n    }\n    expect(values).toEqual([1, 4, 3, 2, 5]);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        let output = \"\";\n        if (temp === null) {\n            console.log(\"empty\");\n            return;\n        }\n        while (temp !== null) {\n            output += String(temp.value);\n            temp = temp.next;\n            if (temp !== null) {\n                output += \" -> \";\n            }\n        }\n        console.log(output);\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.length = 0;\n    }\n \n\tpush(value) {\n\t\tconst newNode = new Node(value);\n\t\tif (!this.head) {\n\t\t\tthis.head = newNode;\n\t\t} else {\n\t\t\tlet current = this.head;\n\t\t\twhile (current.next !== null) {\n\t\t\t\tcurrent = current.next;\n\t\t\t}\n\t\t\tcurrent.next = newNode;\n\t\t}\n\t\tthis.length++;\n\t}\n\t\n\treverseBetween(m, n) {\n        if (this.head === null) return;\n\n        const dummy = new Node(0);\n        dummy.next = this.head;\n        let prev = dummy;\n\n        for (let i = 0; i < m; i++) {\n            prev = prev.next;\n        }\n\n        let current = prev.next;\n        for (let i = 0; i < n - m; i++) {\n            const temp = current.next;\n            current.next = temp.next;\n            temp.next = prev.next;\n            prev.next = temp;\n        }\n\n        this.head = dummy.next;\n    }\n\n}\n\n\n\n\nlet myLinkedList = new LinkedList(1);\nmyLinkedList.push(2);\nmyLinkedList.push(3);\nmyLinkedList.push(4);\nmyLinkedList.push(5);\n\nconsole.log(\"Original list:\");\nmyLinkedList.printList();\nconsole.log(\"----------------------\");\n\nconst m = 2;\nconst n = 4;\nmyLinkedList.reverseBetween(m, n);\n\nconsole.log(`\\nList after reversing between indexes of ${m} and ${n}:`);\nmyLinkedList.printList();\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "007 Queue Using Stacks Dequeue (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement a method called <code><strong>dequeue()</strong></code> for a MyQueue class that removes and returns the element from the front of the queue. The MyQueue class should use two Stack objects to store and manipulate the elements.<br><br>The function should remove the front element from the queue and return its value. If the queue is empty, the function should return <code><strong>null</strong></code>.</p><p><br></p><p>Constraints:</p><ul><li><p>The MyQueue class should be implemented using two Stack objects provided in the Stack class.</p></li><li><p>You cannot use any other data structures or built-in queue manipulation methods for this task.</p></li></ul><p><br></p><p>Class Definition:</p><pre class=\"prettyprint linenums\">class MyQueue {\n    constructor() {\n        this.stack1 = new Stack();\n        this.stack2 = new Stack();\n    }\n\n    // ... other methods ...\n\n    dequeue() {\n        // Your implementation goes here\n    }\n}\n</pre><p><br></p><p><br></p><p>Example 1:</p><p>Suppose you have a MyQueue object, <code><strong>queue</strong></code>, with the following values: <br>[1, 2, 3, 4]<br><br>After calling the <code><strong>dequeue()</strong></code> function:</p><pre class=\"prettyprint linenums\">let dequeuedValue = queue.dequeue();</pre><p><br>The <code><strong>queue</strong></code> should now have the following values: <br>[2, 3, 4], and the <code><strong>dequeuedValue</strong></code> should be 1.</p><p><br></p><p><br></p><p>Example 2:</p><p>Now suppose you have a MyQueue object, <code><strong>queue</strong></code>, with the following values: ['apple', 'banana', 'orange', 'grape']<br><br>After calling the <code><strong>dequeue()</strong></code> function:</p><pre class=\"prettyprint linenums\">let dequeuedValue = queue.dequeue();</pre><p><br>The <code><strong>queue</strong></code> should now have the following values: <br>['banana', 'orange', 'grape'], and the <code><strong>dequeuedValue</strong></code> should be 'apple'.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-04_17-06-30-7ff1e5c763ac5909382a755725f5a9bb.png\">", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Dequeue from an empty queue\nit('should return null when dequeuing an empty queue', () => {\n    const queue = new MyQueue();\n    expect(queue.dequeue()).toBe(null);\n});\n\n// Test 2: Dequeue from a single-element queue\nit('should dequeue the only element', () => {\n    const queue = new MyQueue();\n    queue.enqueue(1);\n    expect(queue.dequeue()).toBe(1);\n    expect(queue.isEmpty()).toBe(true);\n});\n\n// Test 3: Dequeue from a multi-element queue\nit('should dequeue the first element', () => {\n    const queue = new MyQueue();\n    queue.enqueue(1);\n    queue.enqueue(2);\n    queue.enqueue(3);\n    expect(queue.dequeue()).toBe(1);\n    expect(queue.peek()).toBe(2);\n});\n\n// Test 4: Dequeue multiple elements\nit('should dequeue multiple elements', () => {\n    const queue = new MyQueue();\n    queue.enqueue(1);\n    queue.enqueue(2);\n    queue.enqueue(3);\n    queue.dequeue();\n    queue.dequeue();\n    expect(queue.peek()).toBe(3);\n    expect(queue.isEmpty()).toBe(false);\n});\n\n// Test 5: Dequeue until empty\nit('should dequeue until empty', () => {\n    const queue = new MyQueue();\n    queue.enqueue(1);\n    queue.enqueue(2);\n    queue.dequeue();\n    queue.dequeue();\n    expect(queue.dequeue()).toBe(null);\n    expect(queue.isEmpty()).toBe(true);\n});\n\n// Test 6: Dequeue negative numbers\nit('should dequeue negative numbers', () => {\n    const queue = new MyQueue();\n    queue.enqueue(-1);\n    queue.enqueue(-2);\n    expect(queue.dequeue()).toBe(-1);\n    expect(queue.peek()).toBe(-2);\n});\n\n// Test 7: Dequeue zero\nit('should dequeue zero', () => {\n    const queue = new MyQueue();\n    queue.enqueue(0);\n    expect(queue.dequeue()).toBe(0);\n    expect(queue.isEmpty()).toBe(true);\n});\n\n// Test 8: Dequeue decimals\nit('should dequeue decimal numbers', () => {\n    const queue = new MyQueue();\n    queue.enqueue(1.5);\n    expect(queue.dequeue()).toBe(1.5);\n    expect(queue.isEmpty()).toBe(true);\n});\n\n// Test 9: Dequeue string\nit('should dequeue string', () => {\n    const queue = new MyQueue();\n    queue.enqueue('a');\n    expect(queue.dequeue()).toBe('a');\n    expect(queue.isEmpty()).toBe(true);\n});\n\n// Test 10: Dequeue boolean\nit('should dequeue boolean', () => {\n    const queue = new MyQueue();\n    queue.enqueue(true);\n    expect(queue.dequeue()).toBe(true);\n    expect(queue.isEmpty()).toBe(true);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Stack {\n    constructor() {\n        this.stackList = [];\n    }\n\n    isEmpty() {\n        return this.stackList.length === 0;\n    }\n\n    peek() {\n        if (this.isEmpty()) {\n            return null;\n        } else {\n            return this.stackList[this.stackList.length - 1];\n        }\n    }\n\n    push(value) {\n        this.stackList.push(value);\n    }\n\n    pop() {\n        if (this.isEmpty()) return null;\n        return this.stackList.pop();\n    }\n    \n}\n\n\n\nclass MyQueue {\n    constructor() {\n        this.stack1 = new Stack();\n        this.stack2 = new Stack();\n    }\n    \n    peek() {\n        return this.stack1.peek();\n    }\n\n    isEmpty() {\n        return this.stack1.isEmpty();\n    }\n\n    enqueue(value) {\n        while (!this.stack1.isEmpty()) {\n            this.stack2.push(this.stack1.pop());\n        }\n        this.stack1.push(value);\n        while (!this.stack2.isEmpty()) {\n            this.stack1.push(this.stack2.pop());\n        }\n    }\n\n    dequeue() {\n        if (this.isEmpty()) {\n            return null;\n        } else {\n            return this.stack1.pop();\n        }\n    }\n\n}\n\n\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

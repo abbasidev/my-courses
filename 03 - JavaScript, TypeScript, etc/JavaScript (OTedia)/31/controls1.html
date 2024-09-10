@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Controls - Part 1</title>
+    <style>
+      * {
+        font-size: 20px;
+      }
+      #form1 input {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form id="form1">
+        <input type="text" value="2" /><br /><br />
+        <button type="button">Duplicate</button>
+      </form>
+
+      <br />
+      <hr />
+      <br />
+
+      <form id="form2">
+        <input type="checkbox" value="JavaScript" checked /><label
+          >JavaScript</label
+        ><br />
+        <input type="checkbox" value="C#" /><label>C#</label><br />
+        <input type="checkbox" value="C++" /><label>C++</label><br />
+        <input type="checkbox" value="Java" /><label>Java</label><br /><br />
+        <button type="button">Select</button>
+      </form>
+
+      <h2>Your Selection</h2>
+      <div id="result"></div>
+    </div>
+    <script src="controls1.js"></script>
+  </body>
+</html>

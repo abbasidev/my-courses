@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Titr";
+  src: url("assets/titr.woff") format("woff");
+  font-weight: bold;
+}
+
+body {
+  direction: rtl;
+  font-family: Titr;
+}
+
+#banner {
+  width: 900px;
+  height: 300px;
+  background-image: url("assets/back.jpg");
+  margin: 20px auto;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+#banner * {
+  position: absolute;
+  font-size: 40px;
+}
+
+#snowman {
+  top: -400px;
+  right: 485px;
+}
+
+#head1 {
+  color: #47b;
+  top: 30px;
+  right: 900px;
+  width: 400px;
+  transform-origin: right center;
+}
+
+#head2 {
+  color: #47b;
+  top: 30px;
+  right: -300px;
+  width: 240px;
+}
+
+#text1 {
+  color: #e55;
+  top: 130px;
+  right: 900px;
+}
+
+#text2 {
+  color: #e55;
+  top: 180px;
+  right: -200px;
+}
+
+#text3 {
+  color: #e55;
+  top: 130px;
+  right: -400px;
+  width: 400px;
+}
+
+#text4 {
+  color: #e55;
+  top: 180px;
+  right: 900px;
+  width: 200px;
+}

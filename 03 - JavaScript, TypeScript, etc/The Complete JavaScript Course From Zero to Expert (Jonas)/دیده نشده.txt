@@ -1,0 +1,7 @@
+07 - JavaScript in the Browser DOM and Events Fundamentals (03.54)
+13 - Advanced DOM and Events (05.17)
+15 - Mapty App OOP, Geolocation, External Libraries, and More! (03.58)
+18 - Forkify App Building a Modern Application (08.22)
+19 - Setting Up Git and Deployment (01.00)
+
+دیده نشده

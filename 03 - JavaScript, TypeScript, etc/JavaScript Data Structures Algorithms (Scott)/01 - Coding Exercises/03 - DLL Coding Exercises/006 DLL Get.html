@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "006 DLL Get", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement the <code><strong>get</strong></code> method for the <code><strong>DoublyLinkedList</strong></code> class.<br><br>Your <code><strong>get</strong></code> method should accept the following argument:</p><ul><li><p><code><strong>index</strong></code>: a zero-based index indicating the position in the list to retrieve.</p></li></ul><p><br></p><p>The <code><strong>get</strong></code> method should perform the following tasks:</p><p><br></p><ol><li><p>If the index is less than 0 or greater than or equal to the length of the list, return undefined.</p></li><li><p>Determine if the index is in the first or second half of the list:</p><ul><li><p>If the index is less than half the length of the list, start from the head and loop through the list to the index and return the node at that index.</p></li><li><p>If the index is at least half the length of the list, start from the tail and loop backwards to the index and return the node at that index.</p></li></ul></li></ol><p><br></p><p>This method optimizes the search for a value in the list by starting from either the head or the tail based on the index, making it faster for large lists.</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Check if get() returns undefined for negative index\nit('should return undefined for negative index', () => {\n  const dll = new DoublyLinkedList(1);\n  expect(dll.get(-1)).toBeUndefined();\n});\n\n// Test 2: Check if get() returns undefined for index greater than length\nit('should return undefined for index greater than length', () => {\n  const dll = new DoublyLinkedList(1);\n  expect(dll.get(2)).toBeUndefined();\n});\n\n// Test 3: Check if get() returns head for index 0\nit('should return head for index 0', () => {\n  const dll = new DoublyLinkedList(1);\n  expect(dll.get(0).value).toBe(1);\n});\n\n// Test 4: Check if get() returns tail for index length - 1\nit('should return tail for index length - 1', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  expect(dll.get(1).value).toBe(2);\n});\n\n// Test 5: Check if get() returns correct node for a middle index\nit('should return correct node for middle index', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2).push(3);\n  expect(dll.get(1).value).toBe(2);\n});\n\n// Test 6: Check if get() starts search from head for index < length/2\nit('should start from head for index < length/2', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2).push(3).push(4);\n  expect(dll.get(1).value).toBe(2);\n});\n\n// Test 7: Check if get() starts search from tail for index > length/2\nit('should start from tail for index > length/2', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2).push(3).push(4);\n  expect(dll.get(2).value).toBe(3);\n});\n\n// Test 8: Check if get() works for single element list\nit('should work for a single-element list', () => {\n  const dll = new DoublyLinkedList(1);\n  expect(dll.get(0).value).toBe(1);\n});\n\n// Test 9: Check if get() returns undefined for empty list\nit('should return undefined for empty list', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.makeEmpty();\n  expect(dll.get(0)).toBeUndefined();\n});\n\n// Test 10: Check if get() returns correct node for index length/2\nit('should return correct node for index length/2', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2).push(3).push(4).push(5);\n  expect(dll.get(2).value).toBe(3);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n        this.prev = null;\n    }\n}\n \nclass DoublyLinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value){\n        const newNode = new Node(value);\n        if (this.length === 0) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            newNode.prev = this.tail;\n            this.tail = newNode;\n        }\n        this.length++;\n        return this;\n    }\n\n    pop() {\n        if (this.length === 0) return undefined;\n        let temp = this.tail;\n        if (this.length === 1) {\n            this.head = null;\n            this.tail = null;\n        } else {\n            this.tail = this.tail.prev;\n            this.tail.next = null;\n            temp.prev = null;\n        }\n        this.length--;\n        return temp;\n    }\n\n    unshift(value) {\n        const newNode = new Node(value);\n        if (this.length === 0) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            newNode.next = this.head;\n            this.head.prev = newNode;\n            this.head = newNode;\n        }\n        this.length++;\n        return this;\n    }\n\n    shift() {\n        if (this.length === 0) return undefined;\n        let temp = this.head;\n        if (this.length === 1) {\n            this.head = null;\n            this.tail = null;\n        } else {\n            this.head = this.head.next;\n            this.head.prev = null;\n            temp.next = null;\n        }\n        this.length--;\n        return temp;\n    }\n    \n    get(index) {\n        if (index < 0 || index >= this.length) return undefined;\n        let temp = this.head;\n        if (index < this.length/2) {\n            for (let i = 0; i < index; i++) { \n                temp = temp.next;\n            }\n        } else {\n            temp = this.tail;\n            for (let i = this.length - 1; i > index; i--) { \n                temp = temp.prev;\n            }\n        }\n        return temp;\n    }\n\n }\n\n \n\nlet myDLL = new DoublyLinkedList(0);\nmyDLL.push(1);\nmyDLL.push(2);\nmyDLL.push(3);\n\nconsole.log(myDLL.get(3).value);\n\n \n/*\n    EXPECTED OUTPUT:\n    ----------------\n    3\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

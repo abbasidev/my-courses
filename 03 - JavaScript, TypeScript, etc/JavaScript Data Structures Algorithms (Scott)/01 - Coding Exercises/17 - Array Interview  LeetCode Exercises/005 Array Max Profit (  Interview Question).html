@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "005 Array Max Profit (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The function <code><strong>maxProfit</strong></code> aims to find the maximum profit one could achieve by buying and selling a stock once, given an array of stock prices (<code><strong>prices</strong></code>).</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The array can be empty or contain any number of elements.</p></li><li><p>The elements in the array are non-negative integers, representing the stock prices.</p></li><li><p>You must buy before you can sell the stock.</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>prices</strong></code>: An array of integers representing stock prices.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>The function returns the maximum profit achievable by buying and selling a stock once.</p></li><li><p>If no profit can be made, the function returns <code><strong>0</strong></code>.</p></li><li><p>If the array is empty, the function also returns <code><strong>0</strong></code>.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let prices = [7, 1, 5, 3, 6, 4];\nlet result = maxProfit(prices);\n// The function should return 5\n// Buy at price 1 and sell at 6 to achieve a maximum profit of 5.\n</pre></li><li><p><strong>Array with Decreasing Prices</strong></p><pre class=\"prettyprint linenums\">let prices = [5, 4, 3, 2, 1];\nlet result = maxProfit(prices);\n// The function should return 0\n// No profit can be made in this case.\n</pre></li><li><p><strong>Array with Constant Prices</strong></p><pre class=\"prettyprint linenums\">let prices = [2, 2, 2, 2];\nlet result = maxProfit(prices);\n// The function should return 0\n// No profit can be made when the stock price doesn't change.\n</pre></li><li><p><strong>Array with One Price</strong></p><pre class=\"prettyprint linenums\">let prices = [1];\nlet result = maxProfit(prices);\n// The function should return 0\n// Cannot sell the stock after buying.\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">let prices = [];\nlet result = maxProfit(prices);\n// The function should return 0\n// No stock prices given, hence no profit.\n</pre></li><li><p><strong>Array with Random Prices</strong></p><pre class=\"prettyprint linenums\">let prices = [2, 1, 4, 5, 2, 9, 7];\nlet result = maxProfit(prices);\n// The function should return 8\n// Buy at price 1 and sell at 9 to achieve a maximum profit of 8.\n</pre></li><li><p><strong>Array with Increasing Prices</strong></p><pre class=\"prettyprint linenums\">let prices = [1, 2, 3, 4, 5];\nlet result = maxProfit(prices);\n// The function should return 4\n// Buy at price 1 and sell at 5 to achieve a maximum profit of 4.\n</pre></li></ol><p><br></p><p>Note: The goal is to maximize the profit by choosing a single day to buy and a different day in the future to sell.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-09-09-44c8841e4a6ce435b083653fe527d0f9.png\"><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('maxProfit', () => {\n\n    // Test empty array\n    it('should return 0 for an empty array', () => {\n        let arr = [];\n        expect(maxProfit(arr)).toBe(0);\n    });\n\n    // Test array with a single element\n    it('should return 0 for a single-element array', () => {\n        let arr = [1];\n        expect(maxProfit(arr)).toBe(0);\n    });\n\n    // Test array with decreasing values\n    it('should return 0 for an array with decreasing values', () => {\n        let arr = [4, 3, 2, 1];\n        expect(maxProfit(arr)).toBe(0);\n    });\n\n    // Test array with increasing values\n    it('should return max profit for an array with increasing values', () => {\n        let arr = [1, 2, 3, 4];\n        expect(maxProfit(arr)).toBe(3);\n    });\n\n    // Test array with multiple peaks and valleys\n    it('should return max profit for an array with multiple peaks and valleys', () => {\n        let arr = [1, 4, 2, 6];\n        expect(maxProfit(arr)).toBe(5);\n    });\n\n    // Test array with single peak\n    it('should return max profit for an array with a single peak', () => {\n        let arr = [1, 7];\n        expect(maxProfit(arr)).toBe(6);\n    });\n\n    // Test array with single valley\n    it('should return max profit for an array with a single valley', () => {\n        let arr = [7, 8];\n        expect(maxProfit(arr)).toBe(1);\n    });\n    \n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function maxProfit(prices) {\n    let minPrice = Number.MAX_VALUE;\n    let maxProfit = 0;\n\n    for (let price of prices) {\n        minPrice = Math.min(minPrice, price);\n        let profit = price - minPrice;\n        maxProfit = Math.max(maxProfit, profit);\n    }\n\n    return maxProfit;\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array with increasing prices\n// ------------------------------------\nconsole.log(\"Increasing prices:\");\nlet increasingPrices = [1, 2, 3, 4, 5];\nconsole.log(\"Array:\", increasingPrices);\nconsole.log(\"Expected Max Profit: 4\");\nconsole.log(\"Actual Max Profit:\", maxProfit(increasingPrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with decreasing prices\n// ------------------------------------\nconsole.log(\"Decreasing prices:\");\nlet decreasingPrices = [5, 4, 3, 2, 1];\nconsole.log(\"Array:\", decreasingPrices);\nconsole.log(\"Expected Max Profit: 0\");\nconsole.log(\"Actual Max Profit:\", maxProfit(decreasingPrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with random prices\n// ------------------------------------\nconsole.log(\"Random prices:\");\nlet randomPrices = [3, 1, 4, 1, 5, 9, 2, 6, 5];\nconsole.log(\"Array:\", randomPrices);\nconsole.log(\"Expected Max Profit: 8\");\nconsole.log(\"Actual Max Profit:\", maxProfit(randomPrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with same prices\n// ------------------------------------\nconsole.log(\"Same prices:\");\nlet samePrices = [2, 2, 2, 2, 2];\nconsole.log(\"Array:\", samePrices);\nconsole.log(\"Expected Max Profit: 0\");\nconsole.log(\"Actual Max Profit:\", maxProfit(samePrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test empty array\n// ------------------------------------\nconsole.log(\"Empty array:\");\nlet emptyPrices = [];\nconsole.log(\"Array:\", emptyPrices);\nconsole.log(\"Expected Max Profit: 0\");\nconsole.log(\"Actual Max Profit:\", maxProfit(emptyPrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with negative prices\n// ------------------------------------\nconsole.log(\"Negative prices:\");\nlet negativePrices = [-1, -2, -3, -4];\nconsole.log(\"Array:\", negativePrices);\nconsole.log(\"Expected Max Profit: 0\");\nconsole.log(\"Actual Max Profit:\", maxProfit(negativePrices));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with mixed prices\n// ------------------------------------\nconsole.log(\"Mixed prices:\");\nlet mixedPrices = [1, 4, 2, -1, 6];\nconsole.log(\"Array:\", mixedPrices);\nconsole.log(\"Expected Max Profit: 7\");\nconsole.log(\"Actual Max Profit:\", maxProfit(mixedPrices));\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

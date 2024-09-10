@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "003 DLL Pop", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement the <code><strong>pop</strong></code> method for the <code><strong>DoublyLinkedList</strong></code> class.</p><p><br></p><p>The <code><strong>pop</strong></code> method should not accept any arguments. It should perform the following tasks:</p><p><br></p><ol><li><p>Check if there is any node in the list. If there are no nodes, the function should return <code><strong>undefined</strong></code>.</p></li><li><p>Create a temporary variable and set it to the current tail node.</p></li><li><p>Check if there is more than one node in the list:</p><ul><li><p>If there is only one node, set the <code><strong>head</strong></code> and <code><strong>tail</strong></code> to <code><strong>null</strong></code>.</p></li><li><p>If there is more than one node, update the <code><strong>tail</strong></code> to be the previous node and set the new tail's <code><strong>next</strong></code> to <code><strong>null</strong></code>.</p></li></ul></li><li><p>Disconnect the previous tail from the list by setting its <code><strong>prev</strong></code> property to <code><strong>null</strong></code>.</p></li><li><p>Decrease the length of the list by 1.</p></li><li><p>Return the value of the removed node.</p></li></ol>", "tests": [{"file_name": "evaluate.js", "content": "// Test to check if pop works on an empty list\nit('should return undefined for negative index', () => {\n    const dll = new DoublyLinkedList(1);\n    dll.makeEmpty();\n    const result = dll.pop();\n    expect(result === undefined || result === null).toBeTruthy();\n});\n\n\n// Test to check if pop removes the last node\nit('removes the last node', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  const removedNode = dll.pop();\n  expect(removedNode.value).toBe(2);\n  expect(dll.tail.value).toBe(1);\n});\n\n// Test to check if pop updates length\nit('updates the length', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.pop();\n  expect(dll.length).toBe(1);\n});\n\n// Test to check if pop works with single node\nit('handles a single node', () => {\n  const dll = new DoublyLinkedList(1);\n  const removedNode = dll.pop();\n  expect(removedNode.value).toBe(1);\n  expect(dll.head).toBe(null);\n  expect(dll.tail).toBe(null);\n  expect(dll.length).toBe(0);\n});\n\n// Test to check if pop sets tail's next to null\nit('sets tail next to null', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.pop();\n  expect(dll.tail.next).toBe(null);\n});\n\n// Test to check if tail's previous node is null after pop\nit('checks tail previous is null after pop', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.pop();\n  expect(dll.tail.prev).toBe(null);\n});\n\n// Test to check if head's next node is null after pop\nit('checks head next is null after pop', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.pop();\n  expect(dll.head.next).toBe(null);\n});\n\n// Test to check if length becomes zero when last node is popped\nit('checks length becomes zero when last node is popped', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.pop();\n  expect(dll.length).toBe(0);\n});\n\n// Test to check if head and tail become null when last node is popped\nit('checks head and tail are null when last node is popped', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.pop();\n  expect(dll.head).toBe(null);\n  expect(dll.tail).toBe(null);\n});\n\n// Test to check if consecutive pops work as expected\nit('checks consecutive pops', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.push(3);\n  dll.pop();\n  dll.pop();\n  const removedNode = dll.pop();\n  expect(removedNode.value).toBe(1);\n  expect(dll.head).toBe(null);\n  expect(dll.tail).toBe(null);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n        this.prev = null;\n    }\n}\n \nclass DoublyLinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value){\n        const newNode = new Node(value);\n        if (this.length === 0) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            newNode.prev = this.tail;\n            this.tail = newNode;\n        }\n        this.length++;\n        return this;\n    }\n\n    pop() {\n        if (this.length === 0) return undefined;\n        let temp = this.tail;\n        if (this.length === 1) {\n            this.head = null;\n            this.tail = null;\n        } else {\n            this.tail = this.tail.prev;\n            this.tail.next = null;\n            temp.prev = null;\n        }\n        this.length--;\n        return temp;\n    }\n\n}\n\n\n\nlet myDLL = new DoublyLinkedList(1);\nmyDLL.push(2);\n\n// (2) Items in LL - Returns 2 Node\nif (myDLL.length !== 0) {\n    console.log(myDLL.pop().value);\n} else {\n    console.log(\"null\");\n}\n\n// (1) Item in LL - Returns 1 Node\nif (myDLL.length !== 0) {\n    console.log(myDLL.pop().value);\n} else {\n    console.log(\"null\");\n}\n\n// (0) Items in LL - Returns null\nif (myDLL.length !== 0) {\n    console.log(myDLL.pop().value);\n} else {\n    console.log(\"null\");\n}\n \n    \n/*\n    EXPECTED OUTPUT:\n    ----------------\n    2\n    1\n    null\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

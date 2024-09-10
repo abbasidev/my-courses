@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "002 BST Insert", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Write the <code><strong>insert</strong></code> method</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Insert into an empty tree\nit('should insert a node into an empty tree', () => {\n    const bst = new BST();\n    bst.insert(5);\n    expect(bst.root.value).toEqual(5);\n});\n\n// Test 2: Insert smaller value to the left\nit('should insert smaller value to the left', () => {\n    const bst = new BST();\n    bst.insert(5);\n    bst.insert(3);\n    expect(bst.root.left.value).toEqual(3);\n});\n\n// Test 3: Insert larger value to the right\nit('should insert larger value to the right', () => {\n    const bst = new BST();\n    bst.insert(5);\n    bst.insert(7);\n    expect(bst.root.right.value).toEqual(7);\n});\n\n// Test 4: Insert equal value\nit('should not insert equal value', () => {\n    const bst = new BST();\n    bst.insert(5);\n    expect(bst.insert(5)).toBeUndefined();\n});\n\n// Test 5: Insert multiple nodes\nit('should insert multiple nodes correctly', () => {\n    const bst = new BST();\n    bst.insert(5).insert(3).insert(7);\n    expect(bst.root.left.value).toEqual(3);\n    expect(bst.root.right.value).toEqual(7);\n});\n\n// Test 6: Insert negative values\nit('should insert negative values', () => {\n    const bst = new BST();\n    bst.insert(0);\n    bst.insert(-1);\n    expect(bst.root.left.value).toEqual(-1);\n});\n\n// Test 7: Insert zero\nit('should insert zero', () => {\n    const bst = new BST();\n    bst.insert(5);\n    bst.insert(0);\n    expect(bst.root.left.value).toEqual(0);\n});\n\n// Test 8: Insert decimal numbers\nit('should insert decimal numbers', () => {\n    const bst = new BST();\n    bst.insert(1.5);\n    bst.insert(1.4);\n    expect(bst.root.left.value).toEqual(1.4);\n});\n\n// Test 9: Check tree structure\nit('should maintain correct tree structure', () => {\n    const bst = new BST();\n    bst.insert(5).insert(3).insert(7).insert(2).insert(4);\n    expect(bst.root.left.left.value).toEqual(2);\n    expect(bst.root.left.right.value).toEqual(4);\n});\n\n// Test 10: Insert and check root\nit('should keep root unchanged', () => {\n    const bst = new BST();\n    bst.insert(5).insert(3);\n    expect(bst.root.value).toEqual(5);\n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value) {\n        this.value = value;\n        this.left = null;\n        this.right = null;\n    }\n}\n \nclass BST {\n    constructor() {\n        this.root = null;\n    }\n\n    insert(value) {\n        const newNode = new Node(value);\n        if (this.root === null) {\n            this.root = newNode;\n            return this;\n        }\n        let temp = this.root;\n        while(true) {\n            if (newNode.value === temp.value) return undefined;\n            if (newNode.value < temp.value) {\n                if (temp.left === null) {\n                    temp.left = newNode;\n                    return this;\n                }\n                temp = temp.left;\n            } else {\n                if (temp.right === null) {\n                    temp.right = newNode;\n                    return this;\n                } \n                temp = temp.right;\n            }\n        }\n    }\n\n}\n\n\n\nlet myBST = new BST();\n\nmyBST.insert(2);\nmyBST.insert(1);\nmyBST.insert(3);\n\n/*\n    THE LINES ABOVE CREATE THIS TREE:\n                 2\n                / \\\n               1   3\n*/\n\n\nconsole.log(\"Root:\", myBST.root.value);\nconsole.log(\"\\nRoot->Left:\", myBST.root.left.value);\nconsole.log(\"\\nRoot->Right:\", myBST.root.right.value);\n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    Root: 2\n\n    Root->Left: 1\n\n    Root->Right: 3\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

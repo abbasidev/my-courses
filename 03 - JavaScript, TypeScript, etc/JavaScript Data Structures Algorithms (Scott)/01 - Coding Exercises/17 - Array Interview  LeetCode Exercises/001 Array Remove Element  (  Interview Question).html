@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "001 Array Remove Element  (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The <code><strong>removeElement</strong></code> function takes an array of integers (<code><strong>nums</strong></code>) and an integer value (<code><strong>val</strong></code>). <br><br>The function's purpose is to remove all instances of <code><strong>val</strong></code> in the array <code><strong>nums</strong></code> in-place and return the new length of the array.<br><br>In simpler terms, the function modifies the given array by shifting all elements that are not equal to <code><strong>val</strong></code> to the start of the array, and it returns the length of the array after the removal of <code><strong>val</strong></code>.</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The array could have zero or more elements.</p></li><li><p>Do not allocate extra space for another array; you must do this by modifying the input array in-place with O(1) extra memory.</p></li><li><p>The order of elements can be changed. It doesn't matter what you leave beyond the new length.</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>nums</strong></code>: An array of integers, possibly containing duplicates.</p></li><li><p><code><strong>val</strong></code>: An integer value that needs to be removed from <code><strong>nums</strong></code>.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>The function returns an integer representing the new length of the array <code><strong>nums</strong></code>.</p></li></ul><p><br></p><p><strong>Examples</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let nums = [3, 2, 2, 3];\nlet val = 3;\nlet len = removeElement(nums, val);\n// The array nums should be modified to [2, 2]\n// The function should return 2</pre></li><li><p><strong>Array with Different Elements</strong></p><pre class=\"prettyprint linenums\">let nums = [0, 1, 2, 2, 3, 0, 4, 2];\nlet val = 2;\nlet len = removeElement(nums, val);\n// The array nums should be modified to [0, 1, 3, 0, 4]\n// The function should return 5\n</pre></li><li><p><strong>Array with No Match</strong></p><pre class=\"prettyprint linenums\">let nums = [1, 2, 3, 4];\nlet val = 5;\nlet len = removeElement(nums, val);\n// The array nums should be unchanged: [1, 2, 3, 4]\n// The function should return 4\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">let nums = [];\nlet val = 3;\nlet len = removeElement(nums, val);\n// The array nums should be unchanged: []\n// The function should return 0\n</pre></li><li><p><strong>All Elements are </strong><code><strong>val</strong></code></p><pre class=\"prettyprint linenums\">let nums = [7, 7, 7, 7];\nlet val = 7;\nlet len = removeElement(nums, val);\n// The array nums should be empty: []\n// The function should return 0\n</pre></li></ol><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-02-24-df912f544bef3330b2a1a3168b98ff87.png\"><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('removeElement', () => {\n    \n    // Test empty array\n    it('should return 0 for an empty array', () => {\n        let arr = [];\n        expect(removeElement(arr, 3)).toBe(0);\n        expect(arr).toEqual([]);\n    });\n\n    // Test array without the element to remove\n    it('should return the same length for array without the element', () => {\n        let arr = [1, 2, 3, 4];\n        expect(removeElement(arr, 5)).toBe(4);\n        expect(arr.slice(0, 4)).toEqual([1, 2, 3, 4]);\n    });\n\n    // Test array with one type of element to remove\n    it('should return 0 for array with all elements to be removed', () => {\n        let arr = [3, 3, 3, 3];\n        expect(removeElement(arr, 3)).toBe(0);\n        expect(arr.slice(0, 0)).toEqual([]);\n    });\n\n    // Test array with the element to remove scattered\n    it('should return correct length and array after removal', () => {\n        let arr = [1, 2, 3, 4, 2, 2];\n        expect(removeElement(arr, 2)).toBe(3);\n        expect(arr.slice(0, 3)).toEqual([1, 3, 4]);\n    });\n\n    // Test array with all unique elements\n    it('should return length as is for all unique elements', () => {\n        let arr = [1, 2, 3, 4];\n        expect(removeElement(arr, 3)).toBe(3);\n        expect(arr.slice(0, 3)).toEqual([1, 2, 4]);\n    });\n\n    // Test array with negative numbers\n    it('should handle negative numbers correctly', () => {\n        let arr = [-1, -2, -3, -4];\n        expect(removeElement(arr, -2)).toBe(3);\n        expect(arr.slice(0, 3)).toEqual([-1, -3, -4]);\n    });\n\n    // Test array with zeros\n    it('should handle zeros correctly', () => {\n        let arr = [0, 0, 0, 0];\n        expect(removeElement(arr, 0)).toBe(0);\n        expect(arr.slice(0, 0)).toEqual([]);\n    });\n\n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function removeElement(nums, val) {\n    let i = 0;\n    for (let j = 0; j < nums.length; j++) {\n        if (nums[j] !== val) {\n            nums[i] = nums[j];\n            i++;\n        }\n    }\n    return i;\n}\n\n\n\n\n\n// ------------------------------------\n//  Test empty array\n// ------------------------------------\nlet arrEmpty = [];\nconsole.log(\"Test empty array:\");\nconsole.log(\"Before:\", arrEmpty);  // Should print: []\nlet lenEmpty = removeElement(arrEmpty, 3);\nconsole.log(\"After:\", arrEmpty.slice(0, lenEmpty));  // Should print: []\nconsole.log(\"Length:\", lenEmpty);  // Should print: 0\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array without the element to remove\n// ------------------------------------\nlet arrNoElem = [1, 2, 3, 4];\nconsole.log(\"Test array without the element to remove:\");\nconsole.log(\"Before:\", arrNoElem);  // Should print: [1, 2, 3, 4]\nlet lenNoElem = removeElement(arrNoElem, 5);\nconsole.log(\"After:\", arrNoElem.slice(0, lenNoElem));  // Should print: [1, 2, 3, 4]\nconsole.log(\"Length:\", lenNoElem);  // Should print: 4\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with one type of element to remove\n// ------------------------------------\nlet arrOneType = [3, 3, 3, 3];\nconsole.log(\"Test array with one type of element to remove:\");\nconsole.log(\"Before:\", arrOneType);  // Should print: [3, 3, 3, 3]\nlet lenOneType = removeElement(arrOneType, 3);\nconsole.log(\"After:\", arrOneType.slice(0, lenOneType));  // Should print: []\nconsole.log(\"Length:\", lenOneType);  // Should print: 0\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with the element to remove scattered\n// ------------------------------------\nlet arrScattered = [1, 2, 3, 4, 2, 2];\nconsole.log(\"Test array with the element to remove scattered:\");\nconsole.log(\"Before:\", arrScattered);  // Should print: [1, 2, 3, 4, 2, 2]\nlet lenScattered = removeElement(arrScattered, 2);\nconsole.log(\"After:\", arrScattered.slice(0, lenScattered));  // Should print: [1, 3, 4]\nconsole.log(\"Length:\", lenScattered);  // Should print: 3\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all unique elements\n// ------------------------------------\nlet arrUnique = [1, 2, 3, 4];\nconsole.log(\"Test array with all unique elements:\");\nconsole.log(\"Before:\", arrUnique);  // Should print: [1, 2, 3, 4]\nlet lenUnique = removeElement(arrUnique, 3);\nconsole.log(\"After:\", arrUnique.slice(0, lenUnique));  // Should print: [1, 2, 4]\nconsole.log(\"Length:\", lenUnique);  // Should print: 3\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with negative numbers\n// ------------------------------------\nlet arrNegative = [-1, -2, -3, -4];\nconsole.log(\"Test array with negative numbers:\");\nconsole.log(\"Before:\", arrNegative);  // Should print: [-1, -2, -3, -4]\nlet lenNegative = removeElement(arrNegative, -2);\nconsole.log(\"After:\", arrNegative.slice(0, lenNegative));  // Should print: [-1, -3, -4]\nconsole.log(\"Length:\", lenNegative);  // Should print: 3\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with zeros\n// ------------------------------------\nlet arrZeros = [0, 0, 0, 0];\nconsole.log(\"Test array with zeros:\");\nconsole.log(\"Before:\", arrZeros);  // Should print: [0, 0, 0, 0]\nlet lenZeros = removeElement(arrZeros, 0);\nconsole.log(\"After:\", arrZeros.slice(0, lenZeros));  // Should print: []\nconsole.log(\"Length:\", lenZeros);  // Should print: 0\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

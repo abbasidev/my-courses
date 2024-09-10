@@ -1,0 +1,10 @@
+08 12 17
+11 15 16
+دیده نشده
+
+12-web-browser-apis
+بعد از اوتدیا دیده خواهد شد
+
+11-flixx-app-project //not important
+15-tracalorie-project //not important
+16-modules-and-tooling //not important

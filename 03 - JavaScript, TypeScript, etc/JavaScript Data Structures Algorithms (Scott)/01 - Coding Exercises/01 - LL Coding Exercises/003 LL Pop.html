@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "003 LL Pop", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement the <code><strong>pop</strong></code> method for the <code><strong>LinkedList</strong></code> class in JavaScript.<br><br>Your <code><strong>pop</strong></code> method should not accept any inputs.</p><p><br></p><p>The <code><strong>pop</strong></code> method should perform the following tasks:</p><p><br></p><ol><li><p>If the list is empty (i.e., the <code><strong>length</strong></code> attribute is 0), return <code><strong>undefined</strong></code>.</p></li><li><p>Traverse the list to find the second last node. Use two pointers <code><strong>temp</strong></code> and <code><strong>pre</strong></code> to keep track of the current node and the previous node while traversing.</p></li><li><p>Set the <code><strong>tail</strong></code> attribute of the list to the second last node (i.e., the <code><strong>pre</strong></code> pointer).</p></li><li><p>Set the <code><strong>next</strong></code> attribute of the new tail node to <code><strong>null</strong></code>, effectively removing the last node from the list.</p></li><li><p>Decrease the <code><strong>length</strong></code> attribute by one.</p></li><li><p>If the list becomes empty after the <code><strong>pop</strong></code> operation (i.e., the <code><strong>length</strong></code> attribute becomes 0), set both <code><strong>head</strong></code> and <code><strong>tail</strong></code> pointers to <code><strong>null</strong></code>.</p></li><li><p>Return the removed node.</p></li></ol><p><br></p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-06-08_15-38-48-116c20560138e76c4d061c85999afd05.png\">", "tests": [{"file_name": "evaluate.js", "content": "// Validate that pop returns undefined or null for an empty list\nit('validates that pop returns undefined or null for an empty list', () => {\n    // Create a new linked list and make it empty\n    const list = new LinkedList(1);\n    list.makeEmpty();\n    const result = list.pop();\n    expect(result === undefined || result === null).toBeTruthy();\n});\n\n\n// Confirm head and tail are null after popping last element\nit('confirms head and tail are null after popping last element', () => {\n    const list = new LinkedList(1);\n    list.pop();\n    expect(list.head).toBeNull();\n    expect(list.tail).toBeNull();\n});\n\n// Confirm length is zero after popping last element\nit('confirms length is zero after popping last element', () => {\n    const list = new LinkedList(1);\n    list.pop();\n    expect(list.length).toEqual(0);\n});\n\n// Validate returned value after pop operation\nit('validates returned value after pop operation', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    const poppedNode = list.pop();\n    expect(poppedNode.value).toEqual(2);\n});\n\n// Confirm head node remains unchanged after popping non-last element\nit('confirms head node remains unchanged after popping non-last element', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.pop();\n    expect(list.head.value).toEqual(1);\n});\n\n// Confirm tail node is updated correctly after popping\nit('confirms tail node is updated correctly after popping', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.pop();\n    expect(list.tail.value).toEqual(2);\n});\n\n// Validate that tail's next pointer is null after popping\nit('validates that tail\\'s next pointer is null after popping', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.pop();\n    expect(list.tail.next).toBeNull();\n});\n\n// Confirm length is updated correctly after popping\nit('confirms length is updated correctly after popping', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.pop();\n    expect(list.length).toEqual(1);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = this.head;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value) {\n        const newNode = new Node(value)\n        if (!this.head) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            this.tail = newNode;\n        }\n        this.length++;\n        return true;\n    }\n \n     pop() {\n         if (this.length === 0) return undefined;\n         let temp = this.head;\n         let pre = this.head;\n         while(temp.next) {\n             pre = temp;\n             temp = temp.next;\n         }\n         this.tail = pre;\n         this.tail.next = null;\n         this.length--;\n         if (this.length === 0) {\n             this.head = null;\n             this.tail = null;\n         }\n         return temp;\n     }\n     \n }\n \n\n\nlet myLinkedList = new LinkedList(1);\nmyLinkedList.push(2);\n\n// (2) Items - Returns 2 Node\nif (myLinkedList.length !== 0) {\n    console.log(myLinkedList.pop().value);\n} else {\n    console.log(\"null\");\n}\n\n// (1) Item - Returns 1 Node\nif (myLinkedList.length !== 0) {\n    console.log(myLinkedList.pop().value);\n} else {\n    console.log(\"null\");\n}\n\n// (0) Items - Returns null\nif (myLinkedList.length !== 0) {\n    console.log(myLinkedList.pop().value);\n} else {\n    console.log(\"null\");\n}\n\n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    2\n    1\n    null\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

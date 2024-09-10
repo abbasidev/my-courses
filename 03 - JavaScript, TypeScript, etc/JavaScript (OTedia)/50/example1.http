@@ -1,0 +1,37 @@
+
+# GET / HTTP/1.1
+# Host: www.google.com
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+
+
+# GET / HTTP/1.1
+# Host: www.google.com
+# User-Agent: Mozilla/5.0 (Linux; Android 4.4.2); Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Mobile Safari/537.36 OPR/20.0.1396.72047
+
+
+# GET /hhh HTTP/1.1
+# Host: www.google.com
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+
+
+# GET /todos/1 HTTP/1.1
+# Host: jsonplaceholder.typicode.com
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+
+
+# GET /wikipedia/commons/thumb/7/7e/Tim_Berners-Lee_CP_2.jpg/1024px-Tim_Berners-Lee_CP_2.jpg HTTP/1.1
+# Host: upload.wikimedia.org
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+
+
+# POST /form.php HTTP/1.1
+# Host: localhost
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+# Content-Type: application/x-www-form-urlencoded
+
+# firstname=Abbas&lastname=Moqaddam
+
+
+# HEAD /wikipedia/commons/thumb/7/7e/Tim_Berners-Lee_CP_2.jpg/1024px-Tim_Berners-Lee_CP_2.jpg HTTP/1.1
+# host: upload.wikimedia.org
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0

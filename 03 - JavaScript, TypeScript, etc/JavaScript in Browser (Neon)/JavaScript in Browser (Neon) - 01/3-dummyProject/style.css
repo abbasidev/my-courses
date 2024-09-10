@@ -1,0 +1,52 @@
+body {
+  max-width: 500px;
+  margin: 0px auto;
+}
+
+header,
+main,
+footer {
+  border: 2px solid black;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+#to-do-list {
+  padding: 30px;
+}
+
+.to-do-section {
+  padding: 30px;
+}
+
+.to-do-section,
+#to-do-list,
+.to-do-item,
+.title,
+#header-title,
+.to-do-span,
+form {
+  border: 1px solid #3498db;
+}
+
+.red-text {
+  color: red;
+}
+
+#main-title {
+  animation-name: color-change;
+  animation-duration: 5s;
+}
+@keyframes color-change {
+  100% {
+    color: red;
+  }
+}
+
+#main-title {
+  transition: 5s;
+}
+
+#main-title:hover {
+  font-size: 2em;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "002 Array Find Max Min  (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The <code><strong>findMaxMin</strong></code> function takes an array of numbers (<code><strong>myArray</strong></code>) as its input. <br><br>The function aims to find both the maximum and minimum values present in the array. <br><br>It returns an array containing two elements: the first being the maximum value and the second being the minimum value found in <code><strong>myArray</strong></code>.</p><p><br><strong>Constraints:</strong></p><ul><li><p>The array must contain at least one element.</p></li><li><p>The array can contain integers or floating-point numbers.</p></li><li><p>Do not use built-in <code><strong>Math.max</strong></code> or <code><strong>Math.min</strong></code> functions.</p></li><li><p>You are not allowed to sort the array.</p></li></ul><p><br><strong>Parameters:</strong></p><ul><li><p><code><strong>myArray</strong></code>: An array of numbers, either integers or floats.</p></li></ul><p><br><strong>Returns:</strong></p><ul><li><p>The function returns an array <code><strong>[maximum, minimum]</strong></code>, where <code><strong>maximum</strong></code> is the largest number and <code><strong>minimum</strong></code> is the smallest number in <code><strong>myArray</strong></code>.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let myArray = [3, 2, 4, 1];\nlet result = findMaxMin(myArray);\n// The function should return [4, 1]\n</pre></li><li><p><strong>Array with Negative Numbers</strong></p><pre class=\"prettyprint linenums\">let myArray = [-1, -2, -3, -4];\nlet result = findMaxMin(myArray);\n// The function should return [-1, -4]\n</pre></li><li><p><strong>Array with Same Numbers</strong></p><pre class=\"prettyprint linenums\">let myArray = [5, 5, 5, 5];\nlet result = findMaxMin(myArray);\n// The function should return [5, 5]\n</pre></li><li><p><strong>Array with One Element</strong></p><pre class=\"prettyprint linenums\">let myArray = [7];\nlet result = findMaxMin(myArray);\n// The function should return [7, 7]\n</pre></li><li><p><strong>Array with Floating-Point Numbers</strong></p><pre class=\"prettyprint linenums\">let myArray = [1.1, 2.2, 0.9, 3.7];\nlet result = findMaxMin(myArray);\n// The function should return [3.7, 0.9]\n</pre></li><li><p><strong>Array with Mixed Positive and Negative Numbers</strong></p><pre class=\"prettyprint linenums\">let myArray = [-1, 2, -3, 4];\nlet result = findMaxMin(myArray);\n// The function should return [4, -3]\n</pre></li></ol><p><br></p><p>Note: The function assumes that the array is not empty. If you expect to encounter empty arrays, you should handle that separately before calling <code><strong>findMaxMin</strong></code>.</p><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-04-10-965eaf10a4f9e5841910b394dc09ecbb.png\"></p><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('findMaxMin', () => {\n    \n    // Test empty array\n    it('should return undefined for an empty array', () => {\n        expect(findMaxMin([])).toEqual([undefined, undefined]);\n    });\n\n    // Test array with a single element\n    it('should return the element itself as max and min', () => {\n        expect(findMaxMin([4])).toEqual([4, 4]);\n    });\n\n    // Test array with two distinct elements\n    it('should correctly find max and min in array of size 2', () => {\n        expect(findMaxMin([1, 2])).toEqual([2, 1]);\n    });\n\n    // Test array with multiple elements in ascending order\n    it('should correctly find max and min in sorted array', () => {\n        expect(findMaxMin([1, 2, 3, 4, 5])).toEqual([5, 1]);\n    });\n\n    // Test array with multiple elements in descending order\n    it('should correctly find max and min in reverse sorted array', () => {\n        expect(findMaxMin([5, 4, 3, 2, 1])).toEqual([5, 1]);\n    });\n\n    // Test array with multiple similar elements\n    it('should correctly find max and min in array of identical elements', () => {\n        expect(findMaxMin([3, 3, 3, 3])).toEqual([3, 3]);\n    });\n\n    // Test array with negative numbers\n    it('should correctly find max and min when negative numbers are present', () => {\n        expect(findMaxMin([-1, 0, 1])).toEqual([1, -1]);\n    });\n    \n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function findMaxMin(myArray) {\n    let maximum = myArray[0];\n    let minimum = myArray[0];\n    for (let num of myArray) {\n        if (num > maximum) {\n            maximum = num;\n        } else if (num < minimum) {\n            minimum = num;\n        }\n    }\n    return [maximum, minimum];\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array with positive numbers\n// ------------------------------------\nlet arrPos = [1, 2, 3, 4, 5];\nconsole.log(\"Test array with positive numbers:\");\nconsole.log(\"Array:\", arrPos);  // Should print: [1, 2, 3, 4, 5]\nlet resultPos = findMaxMin(arrPos);\nconsole.log(\"Max and Min:\", resultPos);  // Should print: [5, 1]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with negative numbers\n// ------------------------------------\nlet arrNeg = [-1, -2, -3, -4];\nconsole.log(\"Test array with negative numbers:\");\nconsole.log(\"Array:\", arrNeg);  // Should print: [-1, -2, -3, -4]\nlet resultNeg = findMaxMin(arrNeg);\nconsole.log(\"Max and Min:\", resultNeg);  // Should print: [-1, -4]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with both positive and negative numbers\n// ------------------------------------\nlet arrMixed = [-1, 0, 1];\nconsole.log(\"Test array with both positive and negative numbers:\");\nconsole.log(\"Array:\", arrMixed);  // Should print: [-1, 0, 1]\nlet resultMixed = findMaxMin(arrMixed);\nconsole.log(\"Max and Min:\", resultMixed);  // Should print: [1, -1]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all same numbers\n// ------------------------------------\nlet arrSame = [2, 2, 2, 2];\nconsole.log(\"Test array with all same numbers:\");\nconsole.log(\"Array:\", arrSame);  // Should print: [2, 2, 2, 2]\nlet resultSame = findMaxMin(arrSame);\nconsole.log(\"Max and Min:\", resultSame);  // Should print: [2, 2]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with one number\n// ------------------------------------\nlet arrOne = [7];\nconsole.log(\"Test array with one number:\");\nconsole.log(\"Array:\", arrOne);  // Should print: [7]\nlet resultOne = findMaxMin(arrOne);\nconsole.log(\"Max and Min:\", resultOne);  // Should print: [7, 7]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with decimals\n// ------------------------------------\nlet arrDec = [1.5, 2.5, 0.5];\nconsole.log(\"Test array with decimals:\");\nconsole.log(\"Array:\", arrDec);  // Should print: [1.5, 2.5, 0.5]\nlet resultDec = findMaxMin(arrDec);\nconsole.log(\"Max and Min:\", resultDec);  // Should print: [2.5, 0.5]\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with zeros\n// ------------------------------------\nlet arrZero = [0, 0, 0];\nconsole.log(\"Test array with zeros:\");\nconsole.log(\"Array:\", arrZero);  // Should print: [0, 0, 0]\nlet resultZero = findMaxMin(arrZero);\nconsole.log(\"Max and Min:\", resultZero);  // Should print: [0, 0]\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

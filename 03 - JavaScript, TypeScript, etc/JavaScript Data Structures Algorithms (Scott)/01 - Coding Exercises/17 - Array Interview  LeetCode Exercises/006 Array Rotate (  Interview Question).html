@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "006 Array Rotate (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The function <code><strong>rotate</strong></code> modifies an array (<code><strong>nums</strong></code>) by rotating its elements to the right by <code><strong>k</strong></code> steps. <br><br>It does so in-place without allocating extra space.</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The array can be empty or contain any number of elements.</p></li><li><p>The array contains integers.</p></li><li><p>The value of <code><strong>k</strong></code> can be positive, negative, or zero.</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>nums</strong></code>: An array of integers to be rotated.</p></li><li><p><code><strong>k</strong></code>: An integer representing the number of steps to rotate the array to the right.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>The function does not return anything; it modifies the input array (<code><strong>nums</strong></code>) in-place.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">let arr = [1, 2, 3, 4, 5];\nrotate(arr, 1);\n// After rotation, arr should be [5, 1, 2, 3, 4]\n</pre></li><li><p><strong>Rotate by Array Length</strong></p><pre class=\"prettyprint linenums\">let arr = [1, 2, 3];\nrotate(arr, 3);\n// After rotation, arr should be [1, 2, 3]\n</pre></li><li><p><strong>Rotate by Zero</strong></p><pre class=\"prettyprint linenums\">let arr = [4, 3, 2, 1];\nrotate(arr, 0);\n// After rotation, arr should be [4, 3, 2, 1]\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">let arr = [];\nrotate(arr, 1);\n// After rotation, arr should be []\n</pre></li><li><p><strong>Negative </strong><code><strong>k</strong></code><strong> Value</strong></p><pre class=\"prettyprint linenums\">let arr = [5, 6, 7, 8];\nrotate(arr, -1);\n// After rotation, arr should be [6, 7, 8, 5]\n</pre></li><li><p><strong>Array with All Same Elements</strong></p><pre class=\"prettyprint linenums\">let arr = [2, 2, 2, 2];\nrotate(arr, 2);\n// After rotation, arr should be [2, 2, 2, 2]\n</pre></li><li><p><code><strong>k</strong></code><strong> Larger Than Array Size</strong></p><pre class=\"prettyprint linenums\">let arr = [1, 2];\nrotate(arr, 3);\n// After rotation, arr should be [2, 1]\n</pre></li></ol><p><br></p><p>Note: Rotation should be performed in-place, meaning no additional array should be used. The function should implement this without using built-in array methods to perform the rotation.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-10-38-d03f82ab04f7fc1acb7ba585d83184e1.png\"><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('rotate', () => {\n\n    // Test empty array\n    it('should leave an empty array unchanged', () => {\n        let arr = [];\n        rotate(arr, 3);\n        expect(arr).toEqual([]);\n    });\n\n    // Test array with one element\n    it('should leave a single-element array unchanged', () => {\n        let arr = [1];\n        rotate(arr, 3);\n        expect(arr).toEqual([1]);\n    });\n\n    // Test k = 0\n    it('should leave the array unchanged when k = 0', () => {\n        let arr = [1, 2, 3, 4];\n        rotate(arr, 0);\n        expect(arr).toEqual([1, 2, 3, 4]);\n    });\n\n    // Test k < array length\n    it('should correctly rotate when k < array length', () => {\n        let arr = [1, 2, 3, 4];\n        rotate(arr, 2);\n        expect(arr).toEqual([3, 4, 1, 2]);\n    });\n\n    // Test k = array length\n    it('should leave the array unchanged when k = array length', () => {\n        let arr = [1, 2, 3, 4];\n        rotate(arr, 4);\n        expect(arr).toEqual([1, 2, 3, 4]);\n    });\n\n    // Test k > array length\n    it('should correctly rotate when k > array length', () => {\n        let arr = [1, 2, 3, 4];\n        rotate(arr, 5);\n        expect(arr).toEqual([4, 1, 2, 3]);\n    });\n\n    // Test k is a multiple of array length\n    it('should leave the array unchanged when k is a multiple of array length', () => {\n        let arr = [1, 2, 3, 4];\n        rotate(arr, 8);\n        expect(arr).toEqual([1, 2, 3, 4]);\n    });\n    \n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "function rotate(nums, k) {\n    // Limit k to the array size\n    k = k % nums.length;\n\n    // Reverse the first part of the array\n    let start = 0;\n    let end = nums.length - k - 1;\n    while (start < end) {\n        let temp = nums[start];\n        nums[start] = nums[end];\n        nums[end] = temp;\n        \n        start++;\n        end--;\n    }\n\n    // Reverse the second part of the array\n    start = nums.length - k;\n    end = nums.length - 1;\n    while (start < end) {\n        let temp = nums[start];\n        nums[start] = nums[end];\n        nums[end] = temp;\n        \n        start++;\n        end--;\n    }\n\n    // Reverse the whole array\n    start = 0;\n    end = nums.length - 1;\n    while (start < end) {\n        let temp = nums[start];\n        nums[start] = nums[end];\n        nums[end] = temp;\n        \n        start++;\n        end--;\n    }\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array rotation by 1\n// ------------------------------------\nconsole.log(\"Rotate by 1:\");\nlet rotate1 = [1, 2, 3, 4, 5];\nconsole.log(\"Before:         \", rotate1.join(\", \"));\nrotate(rotate1, 1);\nconsole.log(\"Expected After:  5, 1, 2, 3, 4\");\nconsole.log(\"Actual After:   \", rotate1.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array rotation by array length\n// ------------------------------------\nconsole.log(\"Rotate by array length:\");\nlet rotateLen = [1, 2, 3];\nconsole.log(\"Before:         \", rotateLen.join(\", \"));\nrotate(rotateLen, 3);\nconsole.log(\"Expected After:  1, 2, 3\");\nconsole.log(\"Actual After:   \", rotateLen.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array rotation by 0\n// ------------------------------------\nconsole.log(\"Rotate by 0:\");\nlet rotateZero = [4, 3, 2, 1];\nconsole.log(\"Before:         \", rotateZero.join(\", \"));\nrotate(rotateZero, 0);\nconsole.log(\"Expected After:  4, 3, 2, 1\");\nconsole.log(\"Actual After:   \", rotateZero.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test empty array rotation\n// ------------------------------------\nconsole.log(\"Empty array:\");\nlet rotateEmpty = [];\nconsole.log(\"Before:         \", rotateEmpty.join(\", \"));\nrotate(rotateEmpty, 1);\nconsole.log(\"Expected After:  \");\nconsole.log(\"Actual After:   \", rotateEmpty.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array rotation with negative k\n// ------------------------------------\nconsole.log(\"Negative k value:\");\nlet rotateNeg = [5, 6, 7, 8];\nconsole.log(\"Before:         \", rotateNeg.join(\", \"));\nrotate(rotateNeg, -1);\nconsole.log(\"Expected After:  6, 7, 8, 5\");\nconsole.log(\"Actual After:   \", rotateNeg.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all same elements\n// ------------------------------------\nconsole.log(\"All same elements:\");\nlet rotateSame = [2, 2, 2, 2];\nconsole.log(\"Before:         \", rotateSame.join(\", \"));\nrotate(rotateSame, 2);\nconsole.log(\"Expected After:  2, 2, 2, 2\");\nconsole.log(\"Actual After:   \", rotateSame.join(\", \"));\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array rotation with k larger than array size\n// ------------------------------------\nconsole.log(\"k larger than array size:\");\nlet rotateLargeK = [1, 2];\nconsole.log(\"Before:         \", rotateLargeK.join(\", \"));\nrotate(rotateLargeK, 3);\nconsole.log(\"Expected After:  2, 1\");\nconsole.log(\"Actual After:   \", rotateLargeK.join(\", \"));\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

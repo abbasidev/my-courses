@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "007 LL Set", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement the <code><strong>set</strong></code> method for the <code><strong>LinkedList</strong></code> class in JavaScript.<br><br>Your <code><strong>set</strong></code> method should accept two arguments: an index (an integer) and a value.</p><p><br></p><p>The <code><strong>set</strong></code> method should perform the following tasks:</p><p><br></p><ol><li><p>Use the <code><strong>get</strong></code> method to get the node at the given index. If the <code><strong>get</strong></code> method returns <code><strong>null</strong></code> (which means the index is invalid), the <code><strong>set</strong></code> method should also return <code><strong>false</strong></code>.</p></li><li><p>If the <code><strong>get</strong></code> method returns a valid node, set the <code><strong>value</strong></code> of the node to the new value.</p></li><li><p>Return <code><strong>true</strong></code> if the value has been successfully set.</p></li></ol>", "tests": [{"file_name": "evaluate.js", "content": "// Test that set updates the value of the first node\nit('sets the value of the first node when index is 0', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.set(0, 10);\n    expect(result).toEqual(true);\n    expect(list.get(0).value).toEqual(10);\n});\n\n// Test that set updates the value of the last node\nit('sets the value of the last node when index is list length minus 1', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.set(list.length - 1, 30);\n    expect(result).toEqual(true);\n    expect(list.get(list.length - 1).value).toEqual(30);\n});\n\n// Test that set updates the value of a middle node\nit('sets the value of a middle node when index is between 0 and list length minus 1', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.push(4);\n    const result = list.set(2, 20);\n    expect(result).toEqual(true);\n    expect(list.get(2).value).toEqual(20);\n});\n\n// Test that set returns false for a negative index\nit('returns false when trying to set a negative index', () => {\n    const list = new LinkedList(1);\n    const result = list.set(-1, 10);\n    expect(result).toEqual(false);\n});\n\n// Test that set returns false for index >= length\nit('returns false when trying to set an index greater than or equal to the length', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    const result = list.set(2, 10);\n    expect(result).toEqual(false);\n});\n\n// Test that set returns false for an empty list\nit('returns false when trying to set any index in an empty list', () => {\n    const list = new LinkedList(1);\n    list.pop();\n    const result = list.set(0, 10);\n    expect(result).toEqual(false);\n});\n\n// Test for setting value with 0 index on a single-element list\nit('sets the value when the list has only one element and index is 0', () => {\n    const list = new LinkedList(1);\n    const result = list.set(0, 100);\n    expect(result).toEqual(true);\n    expect(list.get(0).value).toEqual(100);\n});\n\n// Test for setting value with invalid index on a single-element list\nit('returns false when the list has only one element and index is not 0', () => {\n    const list = new LinkedList(1);\n    const result = list.set(1, 100);\n    expect(result).toEqual(false);\n});\n\n// Test that set returns true and updates value for a valid index in a long list\nit('sets value in a long list (length > 10)', () => {\n    const list = new LinkedList(0);\n    for (let i = 1; i <= 10; i++) {\n        list.push(i);\n    }\n    const result = list.set(7, 77);\n    expect(result).toEqual(true);\n    expect(list.get(7).value).toEqual(77);\n});\n\n// Test that the value remains unchanged for invalid indices\nit('keeps original value when an invalid index is used', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    const result = list.set(-1, 10);\n    expect(result).toEqual(false);\n    expect(list.get(0).value).toEqual(1);\n    expect(list.get(1).value).toEqual(2);\n});\n\n// Test for setting multiple values consecutively\nit('updates multiple values consecutively', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result1 = list.set(0, 10);\n    const result2 = list.set(1, 20);\n    expect(result1).toEqual(true);\n    expect(result2).toEqual(true);\n    expect(list.get(0).value).toEqual(10);\n    expect(list.get(1).value).toEqual(20);\n});\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = this.head;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value) {\n        const newNode = new Node(value);\n        if (!this.head) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            this.tail = newNode;\n        }\n        this.length++;\n        return true;\n    }\n \n    pop() {\n        if (this.length === 0) return null;\n        let temp = this.head;\n        let pre = this.head;\n        while(temp.next) {\n            pre = temp;\n            temp = temp.next;\n        }\n        this.tail = pre;\n        this.tail.next = null;\n        this.length--;\n        if (this.length === 0) {\n            this.head = null;\n            this.tail = null;\n        }\n        return temp;\n    }\n \n    unshift(value) {\n        const newNode = new Node(value);\n        if(!this.head) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            newNode.next = this.head;\n            this.head = newNode;\n        }\n        this.length++;\n        return this;\n    }\n \n    shift() {\n        if (!this.head) return null;\n        let temp = this.head;\n        this.head = this.head.next;\n        this.length--;\n        if (this.length === 0) {\n            this.tail = null;\n        }\n        temp.next = null;\n        return temp;\n    }\n \n    get(index) {\n        if (index < 0 || index >= this.length) return null;\n        let temp = this.head;\n        for(let i = 0; i < index; i++) {\n            temp = temp.next;\n        }\n        return temp;\n    }\n \n    set(index, value) {\n        let temp = this.get(index);\n        if (temp) {\n            temp.value = value;\n            return true;\n        }\n        return false;\n    }\n \n}\n \n \n\nlet myLinkedList = new LinkedList(0);\nmyLinkedList.push(1);\nmyLinkedList.push(2);\nmyLinkedList.push(3);\n\nconsole.log(\"Linked List before set():\");\nmyLinkedList.printList();\n\nmyLinkedList.set(2, 99);\n\nconsole.log(\"\\nLinked List after set():\");\nmyLinkedList.printList();\n\n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    Linked List before set():\n    0\n    1\n    2\n    3\n    \n    Linked List after set():\n    0\n    1\n    99\n    3\n\n*/\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

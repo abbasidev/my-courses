@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "001 HT Item In Common", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>In this exercise, you are tasked with writing a JavaScript function named <code><strong>itemInCommon</strong></code>. This function should take two arrays as its parameters. The goal of the function is to determine whether the two arrays have at least one element in common.<br><br>If there is at least one common element between the two arrays, your function should return <code><strong>true</strong></code>. If there are no common elements, the function should return <code><strong>false</strong></code>.<br><br><strong>Examples:</strong></p><ul><li><p><code><strong>itemInCommon([1, 3, 5], [2, 4, 5])</strong></code> should return <code><strong>true</strong></code> because both arrays contain the number <code><strong>5</strong></code>.</p></li><li><p><code><strong>itemInCommon([1, 3, 5], [2, 4, 6])</strong></code> should return <code><strong>false</strong></code> because there are no common items.</p><p><br></p></li></ul><p><br></p><p>You can use two types of hash tables to solve this problem in JavaScript:</p><ol><li><p><strong>Map</strong>: A built-in object that allows you to store key-value pairs.</p></li><li><p><strong>Object</strong>: The most basic data structure in JavaScript, which can also act like a hash table for key-value storage.</p></li></ol><p><br></p><p>Your challenge is to solve this problem using either a Map or an Object. Feel free to try both methods for extra practice!</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-09-26_16-45-53-dda0557455e7222bf708664792afd459.png\"><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "// Test when both arrays are empty\nit(\"should return false when both arrays are empty\", function() {\n    expect(itemInCommon([], [])).toBe(false);\n});\n\n// Test when one array is empty\nit(\"should return false when one array is empty\", function() {\n    expect(itemInCommon([1, 2, 3], [])).toBe(false);\n    expect(itemInCommon([], [1, 2, 3])).toBe(false);\n});\n\n// Test when arrays have no common elements\nit(\"should return false when no elements are in common\", function() {\n    expect(itemInCommon([1, 2, 3], [4, 5, 6])).toBe(false);\n});\n\n// Test when arrays have one common element\nit(\"should return true when one element is in common\", function() {\n    expect(itemInCommon([1, 2, 3], [3, 4, 5])).toBe(true);\n});\n\n// Test when arrays have multiple common elements\nit(\"should return true when multiple elements are in common\", function() {\n    expect(itemInCommon([1, 2, 3], [1, 2, 3])).toBe(true);\n});\n\n// Test with arrays of different lengths\nit(\"should work with arrays of different lengths\", function() {\n    expect(itemInCommon([1, 2], [1, 2, 3])).toBe(true);\n    expect(itemInCommon([1, 2], [3, 4, 5])).toBe(false);\n});\n\n// Test with arrays that contain non-integer elements\nit(\"should work with arrays that contain non-integer elements\", function() {\n    expect(itemInCommon([\"a\", \"b\", \"c\"], [\"a\", \"z\"])).toBe(true);\n    expect(itemInCommon([\"a\", \"b\", \"c\"], [\"x\", \"y\", \"z\"])).toBe(false);\n});\n\n// Test with mixed type arrays\nit(\"should work with mixed type arrays\", function() {\n    expect(itemInCommon([1, \"a\"], [1, \"b\"])).toBe(true);\n    expect(itemInCommon([1, \"a\"], [\"a\", 1])).toBe(true);\n    expect(itemInCommon([1, \"a\"], [\"b\", 2])).toBe(false);\n});\n\n"}], "solutions": [{"file_name": "index.js", "content": "function itemInCommon(array1, array2) {\n    const myMap = new Map();\n    \n    for (let i of array1) {\n        myMap.set(i, true);\n    }\n    \n    for (let j of array2) {\n        if (myMap.has(j)) return true;\n    }\n    \n    return false;\n}\n\n\n\n\n\n   \n// ---------------\n// One Common Item\n// ---------------\nconsole.log(\"One Common Item:\");\nconsole.log(\"Input: [1, 3, 5], [2, 4, 5]\");\nconsole.log(\"Output: \", itemInCommon([1, 3, 5], [2, 4, 5]));\nconsole.log(\"---------------\");\n\n// ---------------\n// No Common Items\n// ---------------\nconsole.log(\"No Common Items:\");\nconsole.log(\"Input: [1, 3, 5], [2, 4, 6]\");\nconsole.log(\"Output: \", itemInCommon([1, 3, 5], [2, 4, 6]));\nconsole.log(\"---------------\");\n\n// ---------------\n// Multiple Common Items\n// ---------------\nconsole.log(\"Multiple Common Items:\");\nconsole.log(\"Input: [1, 2, 3], [2, 3, 4]\");\nconsole.log(\"Output: \", itemInCommon([1, 2, 3], [2, 3, 4]));\nconsole.log(\"---------------\");\n\n// ---------------\n// Empty Arrays\n// ---------------\nconsole.log(\"Empty Arrays:\");\nconsole.log(\"Input: [], []\");\nconsole.log(\"Output: \", itemInCommon([], []));\nconsole.log(\"---------------\");\n\n// ---------------\n// One Empty Array\n// ---------------\nconsole.log(\"One Empty Array:\");\nconsole.log(\"Input: [1, 2, 3], []\");\nconsole.log(\"Output: \", itemInCommon([1, 2, 3], []));\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

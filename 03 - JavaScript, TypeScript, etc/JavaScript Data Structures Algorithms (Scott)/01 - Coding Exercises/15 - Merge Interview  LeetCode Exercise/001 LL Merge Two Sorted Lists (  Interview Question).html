@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "001 LL Merge Two Sorted Lists (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p><strong>Description</strong></p><p>The <code><strong>merge</strong></code> method takes in another <code><strong>LinkedList</strong></code> as an input and merges it with the current <code><strong>LinkedList</strong></code>. <br><br>The elements in both lists are assumed to be in ascending order, but the input lists themselves do not need to be sorted.</p><p><br></p><p><strong>Parameters</strong></p><ul><li><p><code><strong>otherList</strong></code>: the other <code><strong>LinkedList</strong></code> to merge with the current list</p></li></ul><p><br></p><p><strong>Return Value</strong></p><p>This method does not return a value, but it modifies the current <code><strong>LinkedList</strong></code> to contain the merged list.</p><p><br></p><p><strong>Example:</strong></p><p><br></p><pre class=\"prettyprint linenums\">// Create the first linked list with elements 1 -&gt; 3 -&gt; 5 -&gt; 7\nconst l1 = new LinkedList(1);\nl1.push(3);\nl1.push(5);\nl1.push(7);\n\n// Create the second linked list with elements 2 -&gt; 4 -&gt; 6 -&gt; 8\nconst l2 = new LinkedList(2);\nl2.push(4);\nl2.push(6);\nl2.push(8);\n\n// Merge the second list into the first one\nl1.merge(l2);\n\n// Now, l1 should contain the merged list 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7 -&gt; 8</pre><p><br></p><p><strong>Details</strong></p><ol><li><p>The <code><strong>merge</strong></code> method works by first obtaining the head node of the 'otherList' and storing it in a local variable named <code><strong>otherHead</strong></code>.</p></li><li><p>A new dummy node is created, initialized with a value of 0. This dummy node serves as the temporary head of the merged list.</p></li><li><p>A variable called <code><strong>current</strong></code> is set to the dummy node. This variable is used to traverse and construct the merged list.</p></li><li><p>The method iterates through both the current list (<code><strong>this.head</strong></code>) and the other list (<code><strong>otherHead</strong></code>). It appends the node with the smaller value to the merged list and moves the head of that list to its next node.</p></li><li><p>The <code><strong>current</strong></code> variable is updated to point to the last node in the merged list.</p></li><li><p>If either of the original lists still has remaining nodes, these are appended to the end of the merged list.</p></li><li><p>The head of the current list is updated to point to the node next to the dummy node, effectively removing the dummy node from the list.</p></li><li><p>The length of the current list (<code><strong>this.length</strong></code>) is updated to include the length of the merged list.</p></li></ol><p><br></p><p><strong>Notes</strong></p><ul><li><p>This method assumes that both the current list and the other list are sorted in ascending order. If this is not the case, the merged list may not be sorted.</p></li><li><p>The <code><strong>merge</strong></code> method modifies the current list to include elements from both lists. If you wish to keep the original lists intact, you should create a new list and copy elements into it.</p></li><li><p>This JavaScript implementation doesn't have <code><strong>getHead</strong></code>, <code><strong>getTail</strong></code>, or <code><strong>getLength</strong></code> methods, unlike some other implementations. The head, tail, and length are directly accessed as properties of the <code><strong>LinkedList</strong></code> instance (<code><strong>this.head</strong></code>, <code><strong>this.tail</strong></code>, <code><strong>this.length</strong></code>).</p></li></ul><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-04_15-46-16-067434e2a8a7857d78334e3e84f76588.png\"></p><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "// Helper function to convert linked list to an array\nfunction linkedListToArray(list) {\n    const arr = [];\n    let current = list.head;\n    while (current !== null) {\n        arr.push(current.value);\n        current = current.next;\n    }\n    return arr;\n}\n\n// Test #1: Merge two lists with multiple items\nit('should merge two lists with multiple items', () => {\n    const list1 = new LinkedList(1);\n    list1.push(3);\n    list1.push(5);\n    const list2 = new LinkedList(2);\n    list2.push(4);\n    list2.push(6);\n    list1.merge(list2);\n    expect(linkedListToArray(list1)).toEqual([1, 2, 3, 4, 5, 6]);\n});\n\n// Test #2: Merge with an empty list\nit('should merge with an empty list', () => {\n    const list1 = new LinkedList(1);\n    list1.push(2);\n    const list2 = new LinkedList(1);\n    list2.makeEmpty();\n    list1.merge(list2);\n    expect(linkedListToArray(list1)).toEqual([1, 2]);\n});\n\n// Test #3: Merge two empty lists\nit('should merge two empty lists', () => {\n    const list1 = new LinkedList(1);\n    list1.makeEmpty();\n    const list2 = new LinkedList(1);\n    list2.makeEmpty();\n    list1.merge(list2);\n    expect(linkedListToArray(list1)).toEqual([]);\n});\n\n// Test #4: Merge lists with negative numbers\nit('should merge lists with negative numbers', () => {\n    const list1 = new LinkedList(-1);\n    list1.push(1);\n    const list2 = new LinkedList(-2);\n    list2.push(2);\n    list1.merge(list2);\n    expect(linkedListToArray(list1)).toEqual([-2, -1, 1, 2]);\n});\n\n// Test #5: Merge lists with duplicate numbers\nit('should merge lists with duplicate numbers', () => {\n    const list1 = new LinkedList(1);\n    list1.push(1);\n    const list2 = new LinkedList(2);\n    list2.push(2);\n    list1.merge(list2);\n    expect(linkedListToArray(list1)).toEqual([1, 1, 2, 2]);\n});\n\n\n\n\n\n\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = this.head;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        let output = \"\";\n        if (temp === null) {\n            console.log(\"empty\");\n            return;\n        }\n        while (temp !== null) {\n            output += String(temp.value);\n            temp = temp.next;\n            if (temp !== null) {\n                output += \" -> \";\n            }\n        }\n        console.log(output);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n\n    push(value) {\n        const newNode = new Node(value);\n        if (!this.head) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            this.tail = newNode;\n        }\n        this.length++;\n        return this;\n    }\n    \n    merge(otherList) {\n        let otherHead = otherList.head;\n        let dummy = { value: 0, next: null };\n        let current = dummy;\n    \n        while (this.head !== null && otherHead !== null) {\n            if (this.head.value < otherHead.value) {\n                current.next = this.head;\n                this.head = this.head.next;\n            } else {\n                current.next = otherHead;\n                otherHead = otherHead.next;\n            }\n            current = current.next;\n        }\n    \n        if (this.head !== null) {\n            current.next = this.head;\n        } else {\n            current.next = otherHead;\n            this.tail = otherList.tail;\n        }\n    \n        this.head = dummy.next;\n        this.length += otherList.length;\n    }\n\t\n}\n\n\n\n\n\n// ------------------------------------\n//  Merge two sorted lists\n// ------------------------------------\nconst list1 = new LinkedList(1);\nlist1.push(3);\nlist1.push(5);\nconst list2 = new LinkedList(2);\nlist2.push(4);\nlist2.push(6);\nconsole.log(\"Merge two sorted lists:\");\nlist1.printList(); // Should print: 1 -> 3 -> 5\nlist2.printList(); // Should print: 2 -> 4 -> 6\nlist1.merge(list2);\nlist1.printList(); // Should print: 1 -> 2 -> 3 -> 4 -> 5 -> 6\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Merge lists with duplicates\n// ------------------------------------\nconst list5 = new LinkedList(1);\nlist5.push(2);\nlist5.push(3);\nconst list6 = new LinkedList(1);\nlist6.push(2);\nlist6.push(3);\nconsole.log(\"Merge lists with duplicates:\");\nlist5.printList(); // Should print: 1 -> 2 -> 3\nlist6.printList(); // Should print: 1 -> 2 -> 3\nlist5.merge(list6);\nlist5.printList(); // Should print: 1 -> 1 -> 2 -> 2 -> 3 -> 3\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Merge lists with negative numbers\n// ------------------------------------\nconst list7 = new LinkedList(-1);\nlist7.push(0);\nconst list8 = new LinkedList(-2);\nlist8.push(-1);\nconsole.log(\"Merge lists with negative numbers:\");\nlist7.printList(); // Should print: -1 -> 0\nlist8.printList(); // Should print: -2 -> -1\nlist7.merge(list8);\nlist7.printList(); // Should print: -2 -> -1 -> -1 -> 0\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Merge lists where one is larger\n// ------------------------------------\nconst list9 = new LinkedList(1);\nlist9.push(2);\nconst list10 = new LinkedList(3);\nlist10.push(4);\nlist10.push(5);\nconsole.log(\"Merge lists where one is larger:\");\nlist9.printList(); // Should print: 1 -> 2\nlist10.printList(); // Should print: 3 -> 4 -> 5\nlist9.merge(list10);\nlist9.printList(); // Should print: 1 -> 2 -> 3 -> 4 -> 5\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

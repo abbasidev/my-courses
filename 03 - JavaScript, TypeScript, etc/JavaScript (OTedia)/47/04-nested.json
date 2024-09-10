@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Professional WordPress Plugin Development, 2nd Edition",
+    "author": {
+      "firstname": "Brad",
+      "lastname": "Williams"
+    },
+    "year": 2020
+  },
+  {
+    "title": "Professional JavaScript for Web Developers, 4th Edition",
+    "author": {
+      "firstname": "Matt",
+      "lastname": "Frisbie"
+    },
+    "year": 2019
+  },
+  {
+    "title": "JavaScript Everywhere",
+    "author": {
+      "firstname": "Adam",
+      "lastname": "Scott"
+    },
+    "year": 2020
+  }
+]

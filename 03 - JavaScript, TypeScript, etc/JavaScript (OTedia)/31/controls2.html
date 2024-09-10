@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Controls - Part 2</title>
+    <style>
+      * {
+        font-size: 20px;
+        direction: rtl;
+        font-family: Calibri;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>انتخاب وضعیت</h1>
+      <form>
+        <input type="radio" name="marriage" value="مجرد" checked /><label
+          >مجرد</label
+        >
+        <input type="radio" name="marriage" value="متاهل" /><label>متاهل</label>
+        <hr />
+        <input type="radio" name="education" value="دیپلم" /><label
+          >دیپلم</label
+        >
+        <input type="radio" name="education" value="لیسانس" checked /><label
+          >لیسانس</label
+        >
+        <input type="radio" name="education" value="فوق لیسانس" /><label
+          >فوق لیسانس</label
+        >
+        <input type="radio" name="education" value="دکتری" /><label
+          >دکتری</label
+        >
+        <hr />
+        <button type="button">مشاهده‌ی وضعیت</button>
+      </form>
+      <h2>وضعیت فعلی شما</h2>
+      <div id="result"></div>
+    </div>
+    <script src="controls2.js"></script>
+  </body>
+</html>

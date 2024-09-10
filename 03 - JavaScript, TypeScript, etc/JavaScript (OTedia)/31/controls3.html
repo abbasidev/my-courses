@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Controls - Part 3</title>
+    <style>
+      * {
+        font-size: 20px;
+        direction: rtl;
+        font-family: Calibri;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>انتخاب وضعیت</h1>
+      <form>
+        <select name="marriage">
+          <option value="مجرد" selected>مجرد</option>
+          <option value="متاهل">متاهل</option>
+        </select>
+        <hr />
+        <select name="education">
+          <option value="دیپلم">دیپلم</option>
+          <option value="لیسانس" selected>لیسانس</option>
+          <option value="فوق لیسانس">فوق لیسانس</option>
+          <option value="دکتری">دکتری</option>
+        </select>
+        <hr />
+        <button type="button">مشاهده‌ی وضعیت</button>
+      </form>
+      <h2>وضعیت فعلی شما</h2>
+      <div id="result"></div>
+    </div>
+    <script src="controls3.js"></script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "002 Merge Sort", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Write the <code><strong>mergeSort</strong></code> function</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Sort an array with positive numbers\nit('should sort an array of positive integers', () => {\n  expect(mergeSort([5, 1, 9, 3, 7, 6, 8, 2, 4, 0]))\n    .toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);\n});\n\n// Test 2: Sort an array with negative numbers\nit('should sort an array that includes negative numbers', () => {\n  expect(mergeSort([-3, -1, 2, -2, 0, 4]))\n    .toEqual([-3, -2, -1, 0, 2, 4]);\n});\n\n// Test 3: Sort an array with duplicate numbers\nit('should sort an array that includes duplicates', () => {\n  expect(mergeSort([1, 2, 1, 2, 1, 0, 0]))\n    .toEqual([0, 0, 1, 1, 1, 2, 2]);\n});\n\n// Test 4: Sort an array with one element\nit('should return the same array if it has one element', () => {\n  expect(mergeSort([1])).toEqual([1]);\n});\n\n// Test 5: Sort an array with decimal numbers\nit('should sort an array with decimal numbers', () => {\n  expect(mergeSort([0.1, 0.2, 0.15, 0.12]))\n    .toEqual([0.1, 0.12, 0.15, 0.2]);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "function merge(array1, array2) {\n    let combined = [];\n    let i = 0;\n    let j = 0;\n    while (i < array1.length && j < array2.length) {\n        if (array1[i] < array2[j]) {\n            combined.push(array1[i]);\n            i++;\n        } else {\n            combined.push(array2[j]);\n            j++;\n        }\n    }\n    while (i < array1.length) {\n        combined.push(array1[i]);\n        i++;\n    }\n    while (j < array2.length) {\n        combined.push(array2[j]);\n        j++;\n    }\n    return combined;\n}\n\nfunction mergeSort(array) {\n    if (array.length === 1) return array;\n\n    let midIndex = Math.floor(array.length/2);\n    let left = mergeSort(array.slice(0, midIndex));\n    let right = mergeSort(array.slice(midIndex));\n    \n    return merge(left, right);\n}\n\n\n\nlet originalArray = [3,1,4,2];\nlet sortedArray = mergeSort( originalArray );\n\nconsole.log( \"Original Array:\", originalArray );\nconsole.log( \"\\nSorted Array:\", sortedArray );\n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    Original Array: [ 3, 1, 4, 2 ]\n\n    Sorted Array: [ 1, 2, 3, 4 ]\n\n*/  "}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

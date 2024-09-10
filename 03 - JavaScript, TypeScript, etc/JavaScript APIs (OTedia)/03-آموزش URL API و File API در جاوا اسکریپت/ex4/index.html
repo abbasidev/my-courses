@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <style>
+      html {
+        font-size: 20px;
+      }
+      #preview > * {
+        width: 100%;
+      }
+    </style>
+    <title>Preview selected file content</title>
+  </head>
+  <body>
+    <div class="container my-4">
+      <div class="row">
+        <div class="col">
+          <div class="mx-auto" style="width: 300px">
+            <input type="file" class="form-control shadow-none" id="selector" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-center">Preview</h5>
+          <div class="mx-auto" style="max-width: 400px" id="preview"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

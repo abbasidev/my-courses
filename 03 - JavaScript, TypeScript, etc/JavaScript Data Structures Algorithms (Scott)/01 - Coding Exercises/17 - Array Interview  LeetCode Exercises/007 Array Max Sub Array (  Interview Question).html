@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "007 Array Max Sub Array (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The function <code><strong>maxSubarray</strong></code> takes an array of integers (<code><strong>nums</strong></code>) and returns the sum of the contiguous subarray (containing at least one number) which has the largest sum.</p><p><br></p><p><strong>Constraints:</strong></p><ul><li><p>The input array may be empty or contain any number of elements.</p></li><li><p>The elements in the array are integers.</p></li></ul><p><br></p><p><strong>Parameters:</strong></p><ul><li><p><code><strong>nums</strong></code>: An array of integers.</p></li></ul><p><br></p><p><strong>Returns:</strong></p><ul><li><p>An integer representing the sum of the contiguous subarray with the largest sum.</p></li></ul><p><br></p><p><strong>Examples:</strong></p><ol><li><p><strong>Basic Example</strong></p><pre class=\"prettyprint linenums\">const result = maxSubarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);\n// The function should return 6 because [4, -1, 2, 1] has the largest sum\n</pre></li><li><p><strong>Single-Element Array</strong></p><pre class=\"prettyprint linenums\">const result = maxSubarray([1]);\n// The function should return 1 because the single element is the largest sum\n</pre></li><li><p><strong>All Negative Numbers</strong></p><pre class=\"prettyprint linenums\">const result = maxSubarray([-1, -2, -3]);\n// The function should return -1 because it is the largest sum in the array\n</pre></li><li><p><strong>Empty Array</strong></p><pre class=\"prettyprint linenums\">const result = maxSubarray([]);\n// The function should return 0 because the array is empty\n</pre></li><li><p><strong>Array with Zero</strong></p><pre class=\"prettyprint linenums\">const result = maxSubarray([0, -1, -2]);\n// The function should return 0 because it is the largest sum in the array\n</pre></li></ol><p><br></p><p>Note: The function should handle edge cases like single-element arrays and empty arrays. It should also be capable of dealing with arrays containing both positive and negative integers.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-10-06_16-12-37-316e79b13ac0b3a4ebd7cdebb15ac276.png\"><p><br></p><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe('maxSubarray', () => {\n\n    // Test empty array\n    it('should return 0 for an empty array', () => {\n        expect(maxSubarray([])).toBe(0);\n    });\n\n    // Test array with all positive numbers\n    it('should return the sum of all elements for an all-positive array', () => {\n        expect(maxSubarray([1, 2, 3, 4])).toBe(10);\n    });\n\n    // Test array with all negative numbers\n    it('should return the largest element for an all-negative array', () => {\n        expect(maxSubarray([-1, -2, -3, -4])).toBe(-1);\n    });\n\n    // Test array with both negative and positive numbers\n    it('should return the max subarray sum for mixed numbers', () => {\n        expect(maxSubarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])).toBe(6);\n    });\n\n    // Test array with single element\n    it('should return the single element if array has only one element', () => {\n        expect(maxSubarray([3])).toBe(3);\n    });\n\n    // Test array with zeros\n    it('should return 0 for an array with all zeros', () => {\n        expect(maxSubarray([0, 0, 0, 0])).toBe(0);\n    });\n\n    // Test array with both zeros and negative numbers\n    it('should return 0 for an array with zeros and negative numbers', () => {\n        expect(maxSubarray([-1, -2, -3, 0, 0])).toBe(0);\n    });\n    \n});\n\n"}], "solutions": [{"file_name": "index.js", "content": "function maxSubarray(nums) {\n    if (nums.length === 0) {\n        return 0;\n    }\n    let maxSum = nums[0];\n    let currentSum = nums[0];\n    for (let i = 1; i < nums.length; i++) {\n        currentSum = Math.max(nums[i], currentSum + nums[i]);\n        maxSum = Math.max(maxSum, currentSum);\n    }\n    return maxSum;\n}\n\n\n\n\n\n// ------------------------------------\n//  Test array with both negative and positive numbers\n// ------------------------------------\nconsole.log(\"Mixed numbers:\");\nlet mixedNums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];\nconsole.log(\"Array:\", mixedNums);\nlet maxSumMixed = maxSubarray(mixedNums);\nconsole.log(\"Expected Max Subarray Sum: 6\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumMixed);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all positive numbers\n// ------------------------------------\nconsole.log(\"All positive numbers:\");\nlet allPositive = [1, 2, 3, 4, 5];\nconsole.log(\"Array:\", allPositive);\nlet maxSumPositive = maxSubarray(allPositive);\nconsole.log(\"Expected Max Subarray Sum: 15\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumPositive);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with all negative numbers\n// ------------------------------------\nconsole.log(\"All negative numbers:\");\nlet allNegative = [-1, -2, -3, -4, -5];\nconsole.log(\"Array:\", allNegative);\nlet maxSumNegative = maxSubarray(allNegative);\nconsole.log(\"Expected Max Subarray Sum: -1\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumNegative);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test empty array\n// ------------------------------------\nconsole.log(\"Empty array:\");\nlet emptyNums = [];\nconsole.log(\"Array:\", emptyNums);\nlet maxSumEmpty = maxSubarray(emptyNums);\nconsole.log(\"Expected Max Subarray Sum: 0\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumEmpty);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with single element\n// ------------------------------------\nconsole.log(\"Single element:\");\nlet singleElement = [3];\nconsole.log(\"Array:\", singleElement);\nlet maxSumSingle = maxSubarray(singleElement);\nconsole.log(\"Expected Max Subarray Sum: 3\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumSingle);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with zeros\n// ------------------------------------\nconsole.log(\"Array with zeros:\");\nlet withZeros = [0, 0, 0, 0];\nconsole.log(\"Array:\", withZeros);\nlet maxSumZeros = maxSubarray(withZeros);\nconsole.log(\"Expected Max Subarray Sum: 0\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumZeros);\nconsole.log(\"---------------\");\n\n// ------------------------------------\n//  Test array with one positive and one negative number\n// ------------------------------------\nconsole.log(\"One positive and one negative number:\");\nlet posNeg = [1, -1];\nconsole.log(\"Array:\", posNeg);\nlet maxSumPosNeg = maxSubarray(posNeg);\nconsole.log(\"Expected Max Subarray Sum: 1\");\nconsole.log(\"Actual Max Subarray Sum:\", maxSumPosNeg);\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

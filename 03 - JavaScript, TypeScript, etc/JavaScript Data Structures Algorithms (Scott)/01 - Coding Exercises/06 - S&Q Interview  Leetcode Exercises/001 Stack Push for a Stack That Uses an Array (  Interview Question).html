@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "001 Stack Push for a Stack That Uses an Array (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>In the <em>Stack: Intro</em> video we discussed how stacks are commonly implemented using an array instead of a Linked List.<br><br>Write the <code><strong>push</strong></code> method to add an item onto a stack that is implemented with an array.</p><p><br></p><p>The method should add the given value to the top of the stack, increasing the size of the stack by one.</p><p><br></p><p>Constraints:</p><ul><li><p>The stack should be implemented using an array.</p></li><li><p>You cannot use built-in methods to manipulate the stack, except for the <code><strong>push()</strong></code> method of the array.</p></li></ul><p><br></p><p>Class Definition:</p><pre class=\"prettyprint linenums\">class Stack {\n    constructor() {\n        this.stackList = [];\n    }\n\n    // ... other methods ...\n\n    push(value) {\n        // Your implementation goes here\n    }\n}\n</pre><p><br></p><p><br></p><p>Example 1:</p><p>Suppose you have a Stack object, <code><strong>stack</strong></code>, with the following values: <br>[1, 2, 3]<br><br>After calling the <code><strong>push()</strong></code> function:</p><p><code><strong>stack.push(4);</strong></code></p><p><br>The stack should now have the following values: [1, 2, 3, 4]</p><p><br></p><p><br></p><p>Example 2:</p><p>Now suppose you have a Stack object, <code><strong>stack</strong></code>, with the following values: <br>['apple', 'banana', 'orange']<br><br>After calling the <code><strong>push()</strong></code> function:</p><p><code><strong>stack.push('grape');</strong></code></p><p><br>The stack should now have the following values: ['apple', 'banana', 'orange', 'grape']</p><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-04_16-42-26-8756f46a9c5fa4241935782df8530dac.png\"></p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Push to an empty stack\nit('should add an element to an empty stack', () => {\n    const stack = new Stack();\n    stack.push(1);\n    expect(stack.getStackList()).toEqual([1]);\n});\n\n// Test 2: Push to a stack with one element\nit('should add an element to a stack with one element', () => {\n    const stack = new Stack();\n    stack.push(1);\n    stack.push(2);\n    expect(stack.getStackList()).toEqual([1, 2]);\n});\n\n// Test 3: Push multiple elements\nit('should add multiple elements', () => {\n    const stack = new Stack();\n    stack.push(1);\n    stack.push(2);\n    stack.push(3);\n    expect(stack.getStackList()).toEqual([1, 2, 3]);\n});\n\n// Test 4: Push negative numbers\nit('should add negative numbers', () => {\n    const stack = new Stack();\n    stack.push(-1);\n    stack.push(-2);\n    expect(stack.getStackList()).toEqual([-1, -2]);\n});\n\n// Test 5: Push zero\nit('should add zero', () => {\n    const stack = new Stack();\n    stack.push(0);\n    expect(stack.getStackList()).toEqual([0]);\n});\n\n// Test 6: Push decimal numbers\nit('should add decimal numbers', () => {\n    const stack = new Stack();\n    stack.push(1.5);\n    stack.push(2.5);\n    expect(stack.getStackList()).toEqual([1.5, 2.5]);\n});\n\n// Test 7: Push strings\nit('should add strings', () => {\n    const stack = new Stack();\n    stack.push(\"a\");\n    stack.push(\"b\");\n    expect(stack.getStackList()).toEqual([\"a\", \"b\"]);\n});\n\n// Test 8: Push mixed types\nit('should add mixed types', () => {\n    const stack = new Stack();\n    stack.push(1);\n    stack.push(\"a\");\n    expect(stack.getStackList()).toEqual([1, \"a\"]);\n});\n\n// Test 9: Push and check size\nit('should increase the size of stack', () => {\n    const stack = new Stack();\n    stack.push(1);\n    expect(stack.size()).toEqual(1);\n});\n\n// Test 10: Push and check top element\nit('should update the top element', () => {\n    const stack = new Stack();\n    stack.push(1);\n    stack.push(2);\n    expect(stack.peek()).toEqual(2);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Stack {\n    constructor() {\n        this.stackList = [];\n    }\n\n    getStackList() {\n        return this.stackList;\n    }\n\n    printStack() {\n        for (let i = this.stackList.length - 1; i >= 0; i--) {\n            console.log(this.stackList[i]);\n        }\n    }\n\n    isEmpty() {\n        return this.stackList.length === 0;\n    }\n\n    peek() {\n        if (this.isEmpty()) {\n            return null;\n        } else {\n            return this.stackList[this.stackList.length - 1];\n        }\n    }\n\n    size() {\n        return this.stackList.length;\n    }\n\n    push(value) {\n        this.stackList.push(value);\n    }\n    \n}\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

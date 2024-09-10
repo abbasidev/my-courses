@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "004 LL Find Kth Node From End (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement a member function called <code><strong>findKthFromEnd(k)</strong></code> that finds and returns the kth node from the end of the linked list.<br><br><strong>Note: this </strong><code><strong>LinkedList</strong></code><strong> implementation does not have a </strong><code><strong>length</strong></code><strong> member variable.</strong></p><p><br></p><p>Output:</p><ul><li><p>Return the kth node from the end of the linked list.</p></li><li><p>If the value of <code><strong>k</strong></code> is greater than or equal to the number of nodes in the list, return <code><strong>null</strong></code>.</p></li></ul><p><br></p><p>Constraints:</p><ul><li><p>You are not allowed to use any additional data structures (such as arrays) or modify the existing data structure.</p></li><li><p>You can only traverse the linked list once.</p></li></ul><p><br></p><p><br></p><p>Example 1:</p><p>Suppose you have a LinkedList object, list, with the following values: <br>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</p><p><br>After calling the <code><strong>findKthFromEnd(2)</strong></code> function:</p><pre class=\"prettyprint linenums\">let kthNode = list.findKthFromEnd(2);\n</pre><p>The kthNode should have the value 4.</p><p><br></p><p><br></p><p>Example 2:</p><p>Now suppose you have a LinkedList object, list, with the following values: 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6</p><p><br>After calling the <code><strong>findKthFromEnd(4)</strong></code> function:</p><pre class=\"prettyprint linenums\">let kthNode = list.findKthFromEnd(4);\n</pre><p>The kthNode should have the value 3.</p><p><br></p><p><br></p><p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-05-02_19-56-08-1d36cff8ba763657b1a0445e2a603c72.png\"></p>", "tests": [{"file_name": "evaluate.js", "content": "// Validate findKthFromEnd on an empty list\nit('returns null when list is empty', () => {\n    const list = new LinkedList(1);\n    list.makeEmpty();\n    const result = list.findKthFromEnd(1);\n    expect(result).toBeNull();\n});\n\n// Validate findKthFromEnd returns head for k = length\nit('returns head when k equals length', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.findKthFromEnd(3);\n    expect(result.value).toBe(1);\n});\n\n// Validate findKthFromEnd returns tail for k = 1\nit('returns tail when k is one', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.findKthFromEnd(1);\n    expect(result.value).toBe(3);\n});\n\n// Validate findKthFromEnd returns correct node\nit('returns correct node when k is between 1 and length', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.push(4);\n    const result = list.findKthFromEnd(2);\n    expect(result.value).toBe(3);\n});\n\n// Validate findKthFromEnd with k = 0\nit('returns null when k is zero', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.findKthFromEnd(0);\n    expect(result).toBeNull();\n});\n\n// Validate findKthFromEnd with negative k\nit('returns null when k is negative', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    const result = list.findKthFromEnd(-1);\n    expect(result).toBeNull();\n});\n\n// Validate findKthFromEnd doesn't affect head\nit('confirms head remains unchanged', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.findKthFromEnd(2);\n    expect(list.head.value).toBe(1);\n});\n\n// Validate findKthFromEnd doesn't affect tail\nit('confirms tail remains unchanged', () => {\n    const list = new LinkedList(1);\n    list.push(2);\n    list.push(3);\n    list.findKthFromEnd(2);\n    expect(list.tail.value).toBe(3);\n});\n\n// Validate findKthFromEnd on single-element list\nit('returns the node for k = 1 on a single-element list', () => {\n    const list = new LinkedList(1);\n    const result = list.findKthFromEnd(1);\n    expect(result.value).toBe(1);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n    }\n}\n \nclass LinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = this.head;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value) {\n        const newNode = new Node(value);\n        if (!this.head) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            this.tail = newNode;\n        }\n    }\n    \n    findKthFromEnd(k) {\n        let slow = this.head;\n        let fast = this.head;\n\n        for (let i = 0; i < k; ++i) {\n            if (fast === null) {\n                return null;\n            }\n            fast = fast.next;\n        }\n\n        while (fast !== null) {\n            slow = slow.next;\n            fast = fast.next;\n        }\n\n        return slow;\n    }\n\n}"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

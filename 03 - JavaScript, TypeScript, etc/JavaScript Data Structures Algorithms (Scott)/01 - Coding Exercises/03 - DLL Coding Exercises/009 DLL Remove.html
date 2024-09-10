@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "009 DLL Remove", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Implement the <code><strong>remove</strong></code> method for the <code><strong>DoublyLinkedList</strong></code> class.<br><br>Your <code><strong>remove</strong></code> method should accept the following argument:</p><ul><li><p><code><strong>index</strong></code>: a zero-based index indicating the position in the list from which to remove a node.</p></li></ul><p><br></p><p>The <code><strong>remove</strong></code> method should perform the following tasks:</p><ol><li><p>If the provided index is 0, remove the node at the start of the list by calling the <code><strong>shift</strong></code> method, and then return the removed node.</p></li><li><p>If the index is exactly the length of the list minus 1, remove the node at the end of the list by calling the <code><strong>pop</strong></code> method, and then return the removed node.</p></li><li><p>If the provided index is less than 0 or greater or equal to the current length of the list, return undefined.</p></li><li><p>Otherwise, find the node to remove by using the <code><strong>get</strong></code> method. Unlink the node from the list by setting the <code><strong>next</strong></code> property of the node's previous node to the node's next node, and setting the <code><strong>prev</strong></code> property of the node's next node to the node's previous node. Nullify the <code><strong>prev</strong></code> and <code><strong>next</strong></code> properties of the removed node. Decrement the length of the list by 1, and return the removed node.</p></li></ol><p><br></p><p>This method allows you to remove a node at a specific position in the list.</p>", "tests": [{"file_name": "evaluate.js", "content": "// Test 1: Remove at negative index\nit('should return undefined for negative index', () => {\n    const dll = new DoublyLinkedList(1);\n    const result = typeof dll.remove === 'function' ? dll.remove(-1) : undefined;\n    expect(result === undefined || result === null).toBeTruthy();\n});\n\n// Test 2: Remove at index greater than length-1\nit('should return undefined for index >= length', () => {\n    const dll = new DoublyLinkedList(1);\n    const result = typeof dll.remove === 'function' ? dll.remove(1) : undefined;\n    expect(result === undefined || result === null).toBeTruthy();\n});\n\n\n// Test 3: Remove from head (index 0)\nit('should remove from head when index is 0', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.remove(0);\n  expect(dll.head.value).toBe(2);\n});\n\n// Test 4: Remove from tail (index === length-1)\nit('should remove from tail when index is length-1', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.remove(1);\n  expect(dll.tail.value).toBe(1);\n});\n\n// Test 5: Remove from the middle\nit('should remove from middle', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.push(3);\n  dll.remove(1);\n  expect(dll.get(1).value).toBe(3);\n});\n\n// Test 6: Check length after remove\nit('should decrease length by 1 after remove', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.remove(0);\n  expect(dll.length).toBe(1);\n});\n\n// Test 7: Remove from empty list\nit('should return undefined when removing from empty list', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.makeEmpty();\n  expect(dll.remove(0)).toBeUndefined();\n});\n\n// Test 8: Multiple removes\nit('should handle multiple removes', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.push(3);\n  dll.remove(0);\n  dll.remove(0);\n  expect(dll.head.value).toBe(3);\n});\n\n// Test 9: Check prev pointer after removing\nit('should correctly update prev pointer after remove', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.push(3);\n  dll.remove(1);\n  expect(dll.get(1).prev.value).toBe(1);\n});\n\n// Test 10: Check next pointer after removing\nit('should correctly update next pointer after remove', () => {\n  const dll = new DoublyLinkedList(1);\n  dll.push(2);\n  dll.push(3);\n  dll.remove(1);\n  expect(dll.get(0).next.value).toBe(3);\n});\n"}], "solutions": [{"file_name": "index.js", "content": "class Node {\n    constructor(value){\n        this.value = value;\n        this.next = null;\n        this.prev = null;\n    }\n}\n \nclass DoublyLinkedList {\n    constructor(value) {\n        const newNode = new Node(value);\n        this.head = newNode;\n        this.tail = newNode;\n        this.length = 1;\n    }\n\n    printList() {\n        let temp = this.head;\n        while (temp !== null) {\n            console.log(temp.value);\n            temp = temp.next;\n        }\n    }\n\n    getHead() {\n        if (this.head === null) {\n            console.log(\"Head: null\");\n        } else {\n            console.log(\"Head: \" + this.head.value);\n        }\n    }\n\n    getTail() {\n        if (this.tail === null) {\n            console.log(\"Tail: null\");\n        } else {\n            console.log(\"Tail: \" + this.tail.value);\n        }\n    }\n\n    getLength() {\n        console.log(\"Length: \" + this.length);\n    }\n\n    makeEmpty() {\n        this.head = null;\n        this.tail = null;\n        this.length = 0;\n    }\n \n    push(value){\n        const newNode = new Node(value);\n        if (this.length === 0) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            this.tail.next = newNode;\n            newNode.prev = this.tail;\n            this.tail = newNode;\n        }\n        this.length++;\n        return this;\n    }\n\n    pop() {\n        if (this.length === 0) return undefined;\n        let temp = this.tail;\n        if (this.length === 1) {\n            this.head = null;\n            this.tail = null;\n        } else {\n            this.tail = this.tail.prev;\n            this.tail.next = null;\n            temp.prev = null;\n        }\n        this.length--;\n        return temp;\n    }\n\n    unshift(value) {\n        const newNode = new Node(value);\n        if (this.length === 0) {\n            this.head = newNode;\n            this.tail = newNode;\n        } else {\n            newNode.next = this.head;\n            this.head.prev = newNode;\n            this.head = newNode;\n        }\n        this.length++;\n        return this;\n    }\n\n    shift() {\n        if (this.length === 0) return undefined;\n        let temp = this.head;\n        if (this.length === 1) {\n            this.head = null;\n            this.tail = null;\n        } else {\n            this.head = this.head.next;\n            this.head.prev = null;\n            temp.next = null;\n        }\n        this.length--;\n        return temp;\n    }\n    \n    get(index) {\n        if (index < 0 || index >= this.length) return undefined;\n        let temp = this.head;\n        if (index < this.length/2) {\n            for (let i = 0; i < index; i++) { \n                temp = temp.next;\n            }\n        } else {\n            temp = this.tail;\n            for (let i = this.length - 1; i > index; i--) { \n                temp = temp.prev;\n            }\n        }\n        return temp;\n    }\n\n    set(index, value) {\n        let temp = this.get(index);\n        if (temp) {\n            temp.value = value;\n            return true;\n        }\n        return false;\n    }\n\n    insert(index, value) {\n        if (index < 0 || index > this.length) return false;\n        if (index === this.length) return this.push(value);\n        if (index === 0) return this.unshift(value);\n        \n        const newNode = new Node(value);\n        const before = this.get(index - 1);\n        const after = before.next;\n        before.next = newNode;\n        newNode.prev = before;\n        newNode.next = after;\n        after.prev = newNode;\n        this.length++;\n        return true;\n    }\n\n    remove(index) {\n        if (index === 0) return this.shift();\n        if (index === this.length - 1) return this.pop();\n        if (index < 0 || index >= this.length) return undefined;\n\n        const temp = this.get(index);\n\n        temp.prev.next = temp.next;\n        temp.next.prev = temp.prev;\n        temp.next = null;\n        temp.prev = null;\n\n        this.length--;\n        return temp;\n    }\n\n }\n\n \n\nlet myDLL = new DoublyLinkedList(1);\nmyDLL.push(2);\nmyDLL.push(3);\nmyDLL.push(4);\nmyDLL.push(5);\n\nconsole.log(\"DLL before remove():\");\nmyDLL.printList();\n\nconsole.log(\"\\nRemoved node:\");\nconsole.log(myDLL.remove(2).value);\nconsole.log(\"DLL after remove() in middle:\");\nmyDLL.printList();\n\nconsole.log(\"\\nRemoved node:\");\nconsole.log(myDLL.remove(0).value);\nconsole.log(\"DLL after remove() of first node:\");\nmyDLL.printList();\n\nconsole.log(\"\\nRemoved node:\");\nconsole.log(myDLL.remove(2).value);\nconsole.log(\"DLL after remove() of last node:\");\nmyDLL.printList();\n\n\n/*\n    EXPECTED OUTPUT:\n    ----------------\n    DLL before remove():\n    1\n    2\n    3\n    4\n    5\n\n    Removed node:\n    3\n    DLL after remove() in middle:\n    1\n    2\n    4\n    5\n\n    Removed node:\n    1\n    DLL after remove() of first node:\n    2\n    4\n    5\n\n    Removed node:\n    5\n    DLL after remove() of last node:\n    2\n    4\n\n*/"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

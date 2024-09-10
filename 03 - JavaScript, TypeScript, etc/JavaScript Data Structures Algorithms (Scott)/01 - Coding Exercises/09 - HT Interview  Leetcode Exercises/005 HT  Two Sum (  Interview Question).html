@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "005 HT  Two Sum (  Interview Question)", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>In this exercise, you are tasked with writing a JavaScript function called <code><strong>twoSum</strong></code>. <br><br>The function should accept an array of integers (<code><strong>nums</strong></code>) and an integer (<code><strong>target</strong></code>). Your task is to find two numbers in the array that sum up to the target integer. The function should return an array containing the indices of these two numbers. If no such numbers exist, return an empty array.</p><p><br></p><p><strong>Examples:</strong></p><ul><li><p><code><strong>twoSum([2, 7, 11, 15], 9)</strong></code> should return <code><strong>[0, 1]</strong></code> because <code><strong>nums[0] + nums[1] = 2 + 7 = 9</strong></code>.</p></li><li><p><code><strong>twoSum([3, 2, 4], 6)</strong></code> should return <code><strong>[1, 2]</strong></code> because <code><strong>nums[1] + nums[2] = 2 + 4 = 6</strong></code>.</p></li></ul><p><br></p><p><br></p><p>There are two primary types of hash tables you can use for this exercise:</p><ol><li><p><strong>Map</strong>: A built-in object in JavaScript that allows you to store key-value pairs.</p></li><li><p><strong>Object</strong>: Another built-in data structure in JavaScript can also be used as a hash table to store key-value pairs.</p></li></ol><p><br></p><p>You are encouraged to implement this function using both a Map and an Object. This will help you understand the differences and nuances between the two types of hash tables.</p><p><br></p><p><br></p><img src=\"https://img-b.udemycdn.com/redactor/raw/coding_exercise_instructions/2023-09-28_16-17-34-84e307ab43e7be713775d400f8f9af52.png\"><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "// Test with empty array\nit(\"should return empty array for empty input\", function() {\n    expect(twoSum([], 10)).toEqual([]);\n});\n\n// Test with one element array\nit(\"should return empty array if only one element\", function() {\n    expect(twoSum([1], 1)).toEqual([]);\n});\n\n// Test with two elements array\nit(\"should return [0, 1] for a two-element array with a solution\", function() {\n    expect(twoSum([1, 9], 10)).toEqual([0, 1]);\n});\n\n// Test with valid solution\nit(\"should return indices of elements that sum to target\", function() {\n    expect(twoSum([2, 7, 11, 15], 9)).toEqual([0, 1]);\n});\n\n// Test with no solution\nit(\"should return empty array when no solution exists\", function() {\n    expect(twoSum([1, 2, 3], 10)).toEqual([]);\n});\n\n// Test with negative numbers\nit(\"should return correct indices for negative numbers\", function() {\n    expect(twoSum([-1, 2, -3, 4], 1)).toEqual([0, 1]);\n});\n\n// Test with multiple solutions\nit(\"should return first correct indices when multiple solutions\", function() {\n    expect(twoSum([3, 3, 11, 15], 6)).toEqual([0, 1]);\n});\n\n// Test with same elements\nit(\"should work with an array of same elements\", function() {\n    expect(twoSum([3, 3, 3], 6)).toEqual([0, 1]);\n});\n\n"}], "solutions": [{"file_name": "index.js", "content": "function twoSum(nums, target) {\n    const numMap = new Map();\n\n    for (let i = 0; i < nums.length; i++) {\n        const num = nums[i];\n        const complement = target - num;\n\n        if (numMap.has(complement)) {\n            return [numMap.get(complement), i];\n        }\n        numMap.set(num, i);\n    }\n\n    return [];\n}\n\n\n\n\n\n// ---------------\n// Unique Solution\n// ---------------\nconsole.log(\"Unique Solution:\");\nconsole.log(\"Input: [2, 7, 11, 15], Target: 9\");\nconsole.log(\"Output: \", JSON.stringify(twoSum([2, 7, 11, 15], 9)));\nconsole.log(\"---------------\");\n\n// ---------------\n// Duplicate Numbers\n// ---------------\nconsole.log(\"Duplicate Numbers:\");\nconsole.log(\"Input: [3, 3, 11, 15], Target: 6\");\nconsole.log(\"Output: \", JSON.stringify(twoSum([3, 3, 11, 15], 6)));\nconsole.log(\"---------------\");\n\n// ---------------\n// No Solution\n// ---------------\nconsole.log(\"No Solution:\");\nconsole.log(\"Input: [2, 7, 11, 15], Target: 30\");\nconsole.log(\"Output: \", JSON.stringify(twoSum([2, 7, 11, 15], 30)));\nconsole.log(\"---------------\");\n\n// ---------------\n// Negative Numbers\n// ---------------\nconsole.log(\"Negative Numbers:\");\nconsole.log(\"Input: [-1, -2, -3, -4, -5], Target: -8\");\nconsole.log(\"Output: \", JSON.stringify(twoSum([-1, -2, -3, -4, -5], -8)));\nconsole.log(\"---------------\");\n\n// ---------------\n// Empty Array\n// ---------------\nconsole.log(\"Empty Array:\");\nconsole.log(\"Input: [], Target: 0\");\nconsole.log(\"Output: \", JSON.stringify(twoSum([], 0)));\nconsole.log(\"---------------\");\n\n\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

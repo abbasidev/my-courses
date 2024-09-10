@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>iframe test</title>
+    <style>
+      * {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <button type="button" id="blank">_blank</button>
+      <button type="button" id="self">_self</button>
+      <button type="button" id="parent">_parent</button>
+      <button type="button" id="top">_top</button>
+    </div>
+    <script>
+      const blank = document.getElementById("blank");
+      const self = document.getElementById("self");
+      const parent = document.getElementById("parent");
+      const top1 = document.getElementById("top");
+
+      blank.addEventListener("click", () =>
+        open("https://codepen.io/", "_blank")
+      );
+      self.addEventListener("click", () =>
+        open("https://codepen.io/", "_self")
+      );
+      parent.addEventListener("click", () =>
+        open("https://codepen.io/", "_parent")
+      );
+      top1.addEventListener("click", () => open("https://codepen.io/", "_top"));
+    </script>
+  </body>
+</html>
