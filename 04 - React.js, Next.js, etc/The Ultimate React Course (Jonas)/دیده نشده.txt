@@ -1,0 +1,3 @@
+04 - [Optional] Review of Essential JavaScript for React
+08 - [Optional] Practice Project Eat-'N-Split
+14 - [Optional] React Before Hooks Class-Based React

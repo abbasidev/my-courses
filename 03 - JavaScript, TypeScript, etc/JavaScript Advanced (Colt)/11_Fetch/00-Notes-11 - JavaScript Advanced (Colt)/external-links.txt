@@ -1,0 +1,9 @@
+
+001 Slides
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/slides/index.html#/4
+
+001 Handout
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/handout/index.html#fetch
+
+006 Exercise-Instructions
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/exercises/fetch/handout/index.html

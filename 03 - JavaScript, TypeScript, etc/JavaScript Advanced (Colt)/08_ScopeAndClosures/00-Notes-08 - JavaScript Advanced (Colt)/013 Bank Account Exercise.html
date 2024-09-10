@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "013 Bank Account Exercise", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Write a function called <code>createAccount</code> that accepts two arguments:</p><ol><li><p>A string for a PIN code</p></li><li><p>A number for an initial deposit amount</p></li></ol><p>The function should return an object with four methods (make sure to name these methods exactly as specified below, including uppercase and lowercase letters):</p><p><strong>1. </strong><code><strong>checkBalance</strong></code><strong> method (it should&nbsp; take one parameter, the PIN):</strong></p><p><strong>\u2022</strong> If the provided PIN is invalid, return the string: <br><code>\"Invalid PIN.\"</code></p><p><strong>\u2022</strong> If the correct PIN is provided, return the current balance as a number value directly.</p><p><strong>2. </strong><code><strong>deposit</strong></code><strong> method (it should take two parameters, the PIN&nbsp;and the deposit amount):</strong></p><p><strong>\u2022</strong> If the provided PIN is invalid, return the string: <br><code>\"Invalid PIN.\"</code></p><p><strong>\u2022</strong> If the correct PIN is provided, increment the account balance by the specified deposit amount and return the string: </p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/coding_exercise_instructions/2024-06-25_22-29-44-4351d69b927e1a9858e5767cd3e2f1b4.png\"></p><p>Here is the same line in text format, so you can easily copy it and adapt it to your code:</p><pre class=\"prettyprint linenums\">\"Successfully deposited $&lt;amount&gt;. Current balance: $&lt;new balance&gt;.\"</pre><p><strong>Note:</strong> Replace <code>&lt;amount&gt;</code> with the actual amount and <code>&lt;new balance&gt;</code> with the new balance after the transaction (do <strong>not</strong> include the angle brackets&nbsp;<code>&lt;</code> and <code>&gt;</code> around the values in the actual string output).</p><p><strong>3. </strong><code><strong>withdraw</strong></code><strong> method (it should take two parameters, the PIN&nbsp;and the withdrawal amount):</strong></p><p><strong>\u2022</strong> If the provided PIN is invalid, return the string: <br><code>\"Invalid PIN.\"</code></p><p><strong>\u2022</strong> If the correct PIN is provided, but the withdrawal amount exceeds the current balance, return the string: </p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/coding_exercise_instructions/2024-06-25_22-29-44-192afc38a107620530f6e326dcd4c07f.png\"></p><p>Here is the same line in text format, so you can easily copy it and adapt it to your code:</p><pre class=\"prettyprint linenums\">\"Withdrawal amount exceeds account balance. Transaction cancelled.\"</pre><p><strong>\u2022</strong> If the correct PIN is provided and the withdrawal amount does not exceed the current balance (i.e., there are enough funds on the balance), decrement the account balance by the withdrawal amount and return the string: </p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/coding_exercise_instructions/2024-06-25_22-29-44-37ac43fd748be6439a1b8c2a841b14ac.png\"></p><p>Here is the same line in text format, so you can easily copy it and adapt it to your code:</p><pre class=\"prettyprint linenums\">\"Successfully withdrew $&lt;amount&gt;. Current balance: $&lt;new balance&gt;.\"</pre><p><strong>Note:</strong> Replace <code>&lt;amount&gt;</code> with the actual amount and <code>&lt;new balance&gt;</code> with the new balance after the transaction (do <strong>not</strong> include the angle brackets&nbsp;<code>&lt;</code> and <code>&gt;</code> around the values in the actual string output).</p><p><strong>4. </strong><code><strong>changePin</strong></code><strong> method (it should take two parameters, the old PIN and the new PIN):</strong></p><p><strong>\u2022</strong> If the old PIN is invalid, return the string: <br><code>\"Invalid PIN.\"</code></p><p><strong>\u2022</strong> If the correct old PIN is provided, change the PIN to the new PIN and return the string: <br><code>\"PIN successfully changed!\"</code></p><p><strong>Important note:</strong> Ensure the returned string values match the exact structure shown in the examples below for all scenarios, including the exact content, uppercase and lowercase letters, punctuation, and spacing.</p><p><strong>Examples:</strong></p><pre class=\"prettyprint linenums\">let account = createAccount(\"1234\", 100);\n\nconsole.log(account.checkBalance(\"oops\")); \n// \"Invalid PIN.\"\n\nconsole.log(account.checkBalance(\"1234\")); \n// 100\n\nconsole.log(account.deposit(\"1234\", 250)); \n// \"Successfully deposited $250. Current balance: $350.\"\n\nconsole.log(account.withdraw(\"1234\", 300)); \n// \"Successfully withdrew $300. Current balance: $50.\"\n\nconsole.log(account.withdraw(\"1234\", 100)); \n// \"Withdrawal amount exceeds account balance. Transaction cancelled.\"\n\nconsole.log(account.changePin(\"1234\", \"5678\")); \n// \"PIN successfully changed!\"\n</pre><p><strong>Further instructions:</strong></p><ol><li><p>Define the <code>createAccount</code> function as specified.</p></li><li><p>Ensure the methods (<code>checkBalance</code>, <code>deposit</code>, <code>withdraw</code>, <code>changePin</code>) handle both valid and invalid PIN scenarios correctly.</p></li><li><p>Follow the example usage to match the expected output format precisely.</p></li><li><p>Test your function thoroughly to ensure all scenarios are covered precisely according to the instructions above.</p></li></ol><p><br></p>", "tests": [{"file_name": "evaluate.js", "content": "describe(\"Account management\", function() {\n    let account;\n\n    beforeEach(function() {\n        // Initialize a new account with a PIN and starting amount before each test\n        account = createAccount('1234', 100);\n    });\n\n    describe(\"checkBalance\", function() {\n        it(\"returns the current balance for the correct PIN\", function() {\n            expect(account.checkBalance('1234')).toEqual(100);\n        });\n\n        it(\"returns an error message for an incorrect PIN\", function() {\n            expect(account.checkBalance('9999')).toEqual('Invalid PIN.');\n        });\n    });\n\n    describe(\"deposit\", function() {\n        it(\"increases the balance when the correct PIN is entered\", function() {\n            expect(account.deposit('1234', 50)).toEqual('Successfully deposited 50. Current balance: 150.');\n        });\n\n        it(\"returns an error message for an incorrect PIN\", function() {\n            expect(account.deposit('9999', 50)).toEqual('Invalid PIN.');\n        });\n    });\n\n    describe(\"withdraw\", function() {\n        it(\"decreases the balance for a valid withdrawal with the correct PIN\", function() {\n            expect(account.withdraw('1234', 50)).toEqual('Successfully withdrew 50. Current balance: 50.');\n        });\n\n        it(\"returns an error message for an incorrect PIN\", function() {\n            expect(account.withdraw('9999', 50)).toEqual('Invalid PIN.');\n        });\n\n        it(\"returns an error message for a withdrawal that exceeds the balance\", function() {\n            expect(account.withdraw('1234', 150)).toEqual('Withdrawal amount exceeds account balance. Transaction cancelled.');\n        });\n    });\n\n    describe(\"changePin\", function() {\n        it(\"changes the PIN when the old PIN is entered correctly\", function() {\n            expect(account.changePin('1234', '5678')).toEqual('PIN successfully changed!');\n        });\n\n        it(\"returns an error message for an incorrect old PIN\", function() {\n            expect(account.changePin('9999', '5678')).toEqual('Invalid PIN.');\n        });\n    });\n});\n"}], "solutions": [{"file_name": "index.js", "content": "function createAccount(pin, amount = 0) {\n  return {\n    checkBalance(inputPin) {\n      if (inputPin !== pin) return \"Invalid PIN.\";\n      return amount;\n    },\n    deposit(inputPin, newAmount) {\n      if (inputPin !== pin) return \"Invalid PIN.\";\n      amount += newAmount;\n      return `Successfully deposited $${newAmount}. Current balance: $${amount}.`;\n    },\n    withdraw(inputPin, withdrawalAmount) {\n      if (inputPin !== pin) return \"Invalid PIN.\";\n      if (withdrawalAmount > amount)\n        return \"Withdrawal amount exceeds account balance. Transaction cancelled.\";\n      amount -= withdrawalAmount;\n      return `Successfully withdrew $${withdrawalAmount}. Current balance: $${amount}.`;\n    },\n    changePin(oldPin, newPin) {\n      if (oldPin !== pin) return \"Invalid PIN.\";\n      pin = newPin;\n      return \"PIN successfully changed!\";\n    }\n  };\n}\n\nconst c = createAccount(1234, 100)\n\nconsole.log(c.checkBalance(1234));"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

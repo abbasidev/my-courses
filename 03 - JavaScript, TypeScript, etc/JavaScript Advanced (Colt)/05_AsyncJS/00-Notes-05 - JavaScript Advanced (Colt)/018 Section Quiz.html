@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 72789238, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What is the primary use of a callback in JavaScript?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>To define a new function within another function.</p>", "<p>To execute a function after a set delay.</p>", "<p>To pass a function to another function, which will call it.</p>", "<p>To return a value from a function.</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "What is the primary use of a callback in JavaScript?", "related_lectures": []}, {"_class": "assessment", "id": 72789242, "assessment_type": "multiple-choice", "prompt": {"question": "<p>How are callbacks used in event-driven programming?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>To store event data.</p>", "<p>To call a function before an event occurs.</p>", "<p>To register a function to be called when an event happens.</p>", "<p>To send data to a server synchronously.</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "How are callbacks used in event-driven programming?", "related_lectures": []}, {"_class": "assessment", "id": 72789246, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What is a common problem associated with sequential callbacks?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>They can lead to \"callback hell\", making the code hard to understand.</p>", "<p>They make asynchronous operations synchronous.</p>", "<p>They are slower than using global variables.</p>", "<p>They are not compatible with modern JavaScript frameworks.</p>"]}, "correct_response": ["a"], "section": "", "question_plain": "What is a common problem associated with sequential callbacks?", "related_lectures": []}, {"_class": "assessment", "id": 72789256, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Why can't JavaScript use a simple pausing function like <code><strong>stopHere</strong></code> or <code><strong>sleep</strong></code> for asynchronous code?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>Because it would prevent other code from running concurrently.</p>", "<p>Because JavaScript is single-threaded and pausing would stop all operations.</p>", "<p>Because it's not supported in ES6 and later.</p>", "<p>Because it would lead to memory leaks.</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "Why can't JavaScript use a simple pausing function like stopHere or sleep for asynchronous code?", "related_lectures": []}, {"_class": "assessment", "id": 72789262, "assessment_type": "multiple-choice", "prompt": {"question": "<p>In the context of promises, what does the <code><strong>then</strong></code> method do?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>It immediately executes the next function in the queue.</p>", "<p>It executes a callback when the promise is resolved.</p>", "<p>It repeats the promise until it's resolved.</p>", "<p>It cancels the promise if it takes too long to resolve.</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "In the context of promises, what does the then method do?", "related_lectures": []}, {"_class": "assessment", "id": 72789264, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What does the <code><strong>async</strong></code> keyword do in a function declaration?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p>It pauses the execution of the function until all callbacks are resolved.</p>", "<p>It makes the function execute asynchronously in a separate thread.</p>", "<p>It ensures the function returns a promise, and enables the use of <code>await</code> within it.</p>", "<p>It automatically handles all errors in the function.</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "What does the async keyword do in a function declaration?", "related_lectures": []}, {"_class": "assessment", "id": 72789268, "assessment_type": "multiple-choice", "prompt": {"question": "<p>How does <code><strong>Promise.all</strong></code> differ from <code><strong>Promise.race</strong></code>?</p>", "relatedLectureIds": "", "feedbacks": ["", "", "", ""], "answers": ["<p><code><strong>Promise.all</strong></code> executes all promises concurrently, while <code><strong>Promise.race</strong></code> executes them sequentially.</p>", "<p><code>Promise.all</code> resolves when all promises are resolved, while <code>Promise.race</code> resolves as soon as one promise resolves.</p>", "<p><code><strong>Promise.all</strong></code> is used for rejecting promises, while <code><strong>Promise.race</strong></code> is used for resolving them.</p>", "<p>There is no difference, both methods do the same thing.</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "How does Promise.all differ from Promise.race?", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>

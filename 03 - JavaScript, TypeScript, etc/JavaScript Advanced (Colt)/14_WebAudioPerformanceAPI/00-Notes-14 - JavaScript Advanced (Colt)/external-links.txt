@@ -1,0 +1,12 @@
+
+001 Slides-Performance-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/slides/index.html#/performance-api
+
+001 Handout-Performance-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/handout/index.html#performance-api
+
+001 Slides-Web-Audio-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/slides/index.html#/web-audio-api
+
+001 Handout-Web-Audio-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/handout/index.html#web-audio-api

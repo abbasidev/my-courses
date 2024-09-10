@@ -1,0 +1,12 @@
+
+001 Slides-Geolocation-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/slides/index.html#/geolocation-api
+
+001 Handout-Geolocation-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/handout/index.html#geolocation-api
+
+001 Slides-Intersection-Observer-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/slides/index.html#/intersection-observer-api
+
+001 Handout-Intersection-Observer-API-
+https://rithm-students-assets.s3.us-west-1.amazonaws.com/udemy/lectures/js-dom-web-apis/handout/index.html#intersection-observer-api
