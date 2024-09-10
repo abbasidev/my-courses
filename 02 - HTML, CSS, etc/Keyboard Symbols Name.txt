@@ -1,0 +1,32 @@
+Keyboard Symbols Name
+
+~   tilde
+`   back quote
+‘    quotation
+“    double quotation
+!    exclamation point
+@   at
+#   sharp, Number Sign
+$    dollar Sign
+%   percent
+^   concatenation, AND
+&   ampersand
+*    star, asterisk
+(    open parenthesis
+)    close parenthesis
+-    dash, hyphen
+_    underline, under Score
++   plus, addition
+=   equals
+|    pipe
+/    forward slash
+\    back slash
+?    question mark
+.    dot, period,
+:    colon
+;    semi-colon
+<   Less Than = LT
+>   Greater Than = GT
+,    comma
+{}  braces
+[]   bracket

@@ -1,0 +1,198 @@
+.container1 {
+  div:nth-child(even) {
+    background-color: red;
+  }
+
+  div:nth-child(odd) {
+    background-color: green;
+  }
+
+  display: grid;
+
+  /* grid-template-columns: 20rem auto 20rem; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  /* grid-template-columns: repeat(6, 1fr); */
+  /* grid-template-columns: repeat(6, 20rem); */
+
+  /* grid-template-rows: 10rem 20rem; */
+  /* grid-template-rows: 1fr 2fr; */
+  /* grid-template-rows: repeat(2, 1fr); */
+  /* grid-template-rows: repeat(2, 20rem); */
+  /* grid-auto-rows: 10rem; */
+
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-rows: 10rem 10rem;
+
+  /* در حالت ریسپانسیو تست شود */
+  grid-auto-rows: 5rem;
+
+  /*
+  row-gap: .2rem;
+  column-gap: .2rem;
+  */
+  gap: 0.2rem;
+
+  justify-items: stretch;
+
+  align-items: stretch;
+
+  justify-content: stretch;
+
+  align-content: stretch;
+}
+
+/* /////////////////////////////////////// */
+
+.container2 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 10rem 30rem 10rem;
+  gap: 0.2rem;
+}
+
+.header {
+  background-color: rebeccapurple;
+  grid-column: 4/-1;
+}
+
+.menu {
+  background-color: brown;
+  grid-column: 1/4; /* grid-column: 1 / span 3; */
+  grid-row: 1/3; /* grid-column: 1 / span 2; */
+}
+
+.content {
+  background-color: blue;
+  grid-column: 4/-1;
+}
+
+.footer {
+  background-color: black;
+  grid-column: 1/-1;
+}
+
+/* /////////////////////////////////////// */
+/* قابلیت شخصی سازی در این حالت زیاد است */
+
+.container3 {
+  display: grid;
+  grid-template-rows: 10rem 30rem 10rem;
+  grid-template-areas:
+    "c01 c01 c02 c03 c04"
+    "c05 c06 c06 c07 c08"
+    "c09 c09 c10 c11 c12";
+  gap: 0.2rem;
+}
+
+.c1 {
+  grid-area: c01;
+  background-color: red;
+}
+.c2 {
+  grid-area: c02;
+  background-color: rebeccapurple;
+}
+.c3 {
+  grid-area: c03;
+  background-color: forestgreen;
+}
+.c4 {
+  grid-area: c04;
+  background-color: fuchsia;
+}
+.c5 {
+  grid-area: c05;
+  background-color: gold;
+}
+.c6 {
+  grid-area: c06;
+  background-color: khaki;
+}
+.c7 {
+  grid-area: c07;
+  background-color: aqua;
+}
+.c8 {
+  grid-area: c08;
+  background-color: gray;
+}
+.c9 {
+  grid-area: c09;
+  background-color: goldenrod;
+}
+.c10 {
+  grid-area: c10;
+  background-color: midnightblue;
+}
+.c11 {
+  grid-area: c11;
+  background-color: mediumorchid;
+}
+.c12 {
+  grid-area: c12;
+  background-color: mediumvioletred;
+}
+
+/* /////////////////// ساخت گالری //////////////////// */
+
+.container4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-auto-rows: 10rem;
+
+  /* پر کردن جاهای خالی */
+  grid-auto-flow: dense;
+}
+
+.g1 {
+  grid-row: auto/span 2;
+  background-color: red;
+}
+.g2 {
+  grid-row: auto/span 2;
+  grid-column: auto/span 2;
+  background-color: rebeccapurple;
+}
+.g3 {
+  grid-column: auto/span 2;
+  background-color: forestgreen;
+}
+.g4 {
+  grid-row: auto/span 2;
+  grid-column: auto/span 2;
+  background-color: fuchsia;
+}
+.g5 {
+  grid-row: auto/span 2;
+  background-color: gold;
+}
+.g6 {
+  grid-column: auto/span 2;
+  background-color: khaki;
+}
+.g7 {
+  grid-row: auto/span 2;
+  background-color: aqua;
+}
+.g8 {
+  grid-row: auto/span 2;
+  grid-column: auto/span 2;
+  background-color: gray;
+}
+.g9 {
+  grid-column: auto/span 2;
+  background-color: goldenrod;
+}
+.g10 {
+  grid-row: auto/span 1;
+  background-color: midnightblue;
+}
+.g11 {
+  grid-row: auto/span 2;
+  grid-column: auto/span 2;
+  background-color: mediumorchid;
+}
+.g12 {
+  grid-row: auto/span 1;
+  background-color: mediumvioletred;
+}

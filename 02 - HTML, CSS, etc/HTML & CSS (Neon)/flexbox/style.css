@@ -1,0 +1,28 @@
+html {
+  font-size: 62.5%;
+}
+
+.container {
+  background: gray;
+  border: 0.4rem solid black;
+  height: 40rem;
+
+  div {
+    font-size: 2rem;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+  }
+}
+
+.search {
+  background: red;
+}
+
+.home {
+  background: green;
+}
+
+.login {
+  background: blue;
+}

@@ -1,0 +1,15 @@
+Install SASS
+
+1- npm init
+
+2- npm i sass --save-dev
+
+3- npm i npm-run-all --save-dev  
+
+
+"scripts": {
+    "watch:sass": "sass scss/main.scss css/main.css --watch",
+    "compress:sass": "sass scss/main.scss css/main-min.css --watch --style compressed",
+    "devserver": "live-server",
+    "start": "npm-run-all --parallel compress:sass devserver"
+}
