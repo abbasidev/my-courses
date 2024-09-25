@@ -1,0 +1,3 @@
+C:\Users\Windows 10\.vscode
+
+C:\Users\Windows 10\AppData\Roaming\Code

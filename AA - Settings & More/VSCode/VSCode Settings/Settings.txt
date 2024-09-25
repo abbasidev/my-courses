@@ -1,0 +1,16 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+  "editor.fontSize": 16,
+  "workbench.iconTheme": "material-icon-theme",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "explorer.compactFolders": false,
+  "workbench.colorTheme": "One Monokai",
+  "git.autofetch": true,
+  "terminal.integrated.env.windows": {},
+  "chatgpt.lang": "en",
+  "extensions.autoUpdate": false
+}

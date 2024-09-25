@@ -110,10 +110,10 @@ const restaurant = {
 
 ///////////////////////////////////////////////////////
 
-// console.log(restaurant.order(0, 2));
+console.log(restaurant.order(0, 2));
 
-// const [starter, main] = restaurant.order(0, 2);
-// console.log(starter, main);
+const [starter, main] = restaurant.order(0, 2);
+console.log(starter, main);
 
 ///////////////////////////////////////////////////////
 
