@@ -6,39 +6,36 @@
 //// Data needed for first part of the section
 
 const restaurant = {
-  ////
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  ////
-  order: function (starterIndex, mainIndex) {
+
+  // order: function (starterIndex, mainIndex) {
+  //   return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  // },
+
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
-  ////
-  orderDelivery: function ({
-    starterIndex = 1,
-    mainIndex = 0,
-    time = "20:00",
-    address,
-  }) {
+
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = "20:00", address }) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
-  ////
-  orderPasta: function (ing1, ing2, ing3) {
+
+  orderPasta(ing1, ing2, ing3) {
     console.log(
       `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
-  ////
-  orderPizza: function (mainIngredient, ...otherIngredients) {
+
+  orderPizza(mainIngredient, ...otherIngredients) {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-  ////
 };
 
 ///////////////////////////////////////////////////////
@@ -110,10 +107,10 @@ const restaurant = {
 
 ///////////////////////////////////////////////////////
 
-console.log(restaurant.order(0, 2));
+// console.log(restaurant.order(0, 2));
 
-const [starter, main] = restaurant.order(0, 2);
-console.log(starter, main);
+// const [starter, main] = restaurant.order(0, 2);
+// console.log(starter, main);
 
 ///////////////////////////////////////////////////////
 
@@ -175,8 +172,8 @@ console.log(starter, main);
 ///////////////////////////////////////////////////////
 
 // const arr = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 };
-// const { a, b, ...c } = arr;
-// console.log(a, b, c);
+// const { a, b, ...x } = arr;
+// console.log(a, b, x);
 
 ///////////////////////////////////////////////////////
 
@@ -244,8 +241,11 @@ console.log(starter, main);
 // console.log(userId(user));
 
 // //// Nested objects and renaming
-// function whois({ displayName: dn, fullName: { firstName: name } }) {
-//   return `${dn} is ${name}`;
+// function whois({
+//   displayName: dn,
+//   fullName: { firstName: fName, lastName: lName },
+// }) {
+//   return `${dn} is ${fName} ${lName}`;
 // }
 // console.log(whois(user));
 
@@ -369,7 +369,9 @@ console.log(starter, main);
 
 // const add = function (...numbers) {
 //   let sum = 0;
-//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   for (let i = 0; i < numbers.length; i++) {
+//     sum += numbers[i];
+//   }
 //   console.log(sum);
 // };
 // add(1, 2);
@@ -472,6 +474,15 @@ console.log(starter, main);
 
 //// Looping Arrays The for-of Loop
 
+//// for-of Loop
+//// برای حلقه زدن روی تکرار پذیرها استفاده میشود
+//// تکرار پذیرها = Iterables
+//// Iterables = خیلی چزها در جاوا اسکریپت تکرار پذیر هستند به جر آبجکت ها
+//// Iterables = arrays, strings, maps, sets, ..., but NOT OBJECTS
+
+//// for-in Loop
+//// برای حلقه زدن روی آبجکت ها استفاده میشود و روی همه ی اشیا قابل استفاده ست
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -491,7 +502,9 @@ console.log(starter, main);
 
 ///////////////////////////////////////////////////////
 
+// //// entries = به معنای ورودی ها
 // //// entries method
+
 // const arr = [11, 22, 33, 44, 55, 66, 77, 88, 99];
 
 // for (const item of arr.entries()) {
@@ -511,6 +524,7 @@ console.log(starter, main);
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+//// Enhanced = به معنای تقویت شده
 //// Enhanced Object Literals
 
 ///////////////////////////////////////////////////////
@@ -533,24 +547,6 @@ console.log(starter, main);
 // };
 
 // console.log(obj);
-
-///////////////////////////////////////////////////////
-
-// //// نوشتن متود بدون نوشتن کلمه فانکشن
-// const obj = {
-//   now: 2023,
-//   name: "Amir",
-//   //// old
-//   // age: function (birthYear) {
-//   //   return this.now - birthYear;
-//   // },
-//   //// es6
-//   age(birthYear) {
-//     return this.now - birthYear;
-//   },
-// };
-
-// console.log(obj.age(1999));
 
 ///////////////////////////////////////////////////////
 
@@ -596,7 +592,7 @@ console.log(starter, main);
 //     age: 23,
 //   },
 //   person2: {
-//     name: "Aida",
+//     name: "Ali",
 //     age: 18,
 //   },
 // };
@@ -633,14 +629,22 @@ console.log(starter, main);
 // console.log(users[0]?.firstName || "user array empty");
 // console.log(users[0]?.firstName && "user array empty");
 
+// //// way 1
 // if (users.length > 0) console.log(users[0].firstName, users[0].lastName);
 // else console.log("user array empty");
 
+// //// way 2
+// if (users.length > 0) {
+//   console.log(users[0].firstName, users[0].lastName);
+// } else {
+//   console.log("user array empty");
+// }
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-//// Looping Objects Object Keys, Values, and Entries
+//// Looping Objects: Object Keys, Values, and Entries
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -652,15 +656,15 @@ console.log(starter, main);
 //     age: 23,
 //   },
 //   person2: {
-//     name: "Aida",
+//     name: "Ali",
 //     age: 19,
 //   },
 //   person3: {
-//     name: "Hani",
+//     name: "Reza",
 //     age: 27,
 //   },
 //   person4: {
-//     name: "Nazi",
+//     name: "Hadi",
 //     age: 14,
 //   },
 // };
@@ -786,10 +790,13 @@ console.log(starter, main);
 // console.log(arrToSet);
 
 // const setToArr1 = [...new Set(arr)];
-// console.log(setToArr1);
+// console.log("1:", setToArr1);
 
 // const setToArr2 = Array.from(new Set(arr));
-// console.log(setToArr2);
+// console.log("2:", setToArr2);
+
+// const setToArr3 = [...arrToSet];
+// console.log("3:", setToArr3);
 
 // console.log(new Set("Abbasi").size);
 // console.log(new Set("abbasi").size);
@@ -1017,9 +1024,14 @@ console.log(starter, main);
 // console.log("Amir Abbasi".split(" ").join(" "));
 
 // const [firstName, lastName] = "Amir Abbasi".split(" ");
+// console.log(firstName);
+// console.log(lastName);
 
-// const newName = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
-// console.log(newName);
+// const newName1 = ["Mr.", firstName, lastName.toUpperCase()];
+// console.log(newName1);
+
+// const newName2 = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
+// console.log(newName2);
 
 ///////////////////////////////////////////////////////
 
