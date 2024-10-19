@@ -25,6 +25,7 @@
 //     numPassengers,
 //     price,
 //   };
+
 //   console.log(booking);
 // };
 
@@ -35,6 +36,9 @@
 // //// اگر اندیفایند بدیم مقدار پیش فرض رو خواهند گرفت
 // createBooking("LH123", 2, undefined);
 // createBooking("LH123", undefined, undefined);
+
+// createBooking("LH123", null);
+// createBooking("LH123", null, null);
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -165,6 +169,7 @@
 // greetHey("Nazi");
 // ////
 // greet("Hello")("Amir");
+// greet("Hello")("Nazi");
 
 ///////////////////////////////////////////////////////
 
@@ -180,6 +185,7 @@
 // greetHey("Nazi");
 // ////
 // greet("Hello")("Amir");
+// greet("Hello")("Nazi");
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -304,6 +310,7 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+//// توابع بازگشتی
 //// Immediately Invoked Function Expressions (IIFE)
 
 ///////////////////////////////////////////////////////
@@ -401,32 +408,21 @@
 
 ///////////////////////////////////////////////////////
 
-// //// higher-order function (OtediaJS)
-// function outer() {
-//   let outside = "Outside";
-//   function inner() {
-//     let inside = "Inside";
-//     console.log(inside);
-//     console.log(outside);
-//   }
-//   return inner;
-// }
-
-// let myFunc = outer();
-// myFunc();
-
-///////////////////////////////////////////////////////
-
 // //// Closures (OtediaJS)
 // function makeAdder(x) {
 //   return function (y) {
 //     return x + y;
 //   };
 // }
-// const adder1 = makeAdder(5);
-// const adder2 = makeAdder(10);
-// console.log(adder1(2));
+
+// //// way 1
+// const adder1 = makeAdder(50);
+// const adder2 = makeAdder(30);
+// console.log(adder1(5));
 // console.log(adder2(3));
+
+// //// way 2
+// console.log(makeAdder(1)(110));
 
 // //// Change outside variables
 // function makeCounter(start) {
@@ -435,17 +431,17 @@
 //     return i++;
 //   };
 // }
+
 // const counter1 = makeCounter(1);
-// const counter2 = makeCounter(10);
-
+// const counter2 = makeCounter(11);
+// console.log(counter1());
 // console.log(counter1());
 // console.log(counter2());
-
-// console.log(counter1());
 // console.log(counter2());
 
-// console.log(counter1());
-// console.log(counter2());
+// //// (Not Save in variable)
+// console.log(makeCounter(1)());
+// console.log(makeCounter(1)());
 
 ///////////////////////////////////////////////////////
 
@@ -496,6 +492,8 @@
 
 // //// Re-assigning f function
 // h();
+// f();
+// f();
 // f();
 // console.dir(f);
 
