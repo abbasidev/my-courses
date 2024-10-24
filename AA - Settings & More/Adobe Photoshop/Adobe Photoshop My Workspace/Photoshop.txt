@@ -1,7 +1,6 @@
 C:\Users\Abbasi Dex\AppData\Roaming\Adobe\Adobe Photoshop 2024\Adobe Photoshop 2024 Settings\WorkSpaces
 
-تمام ورک اسپیس ها اد شدن به جز
-
+تمامی اد شدن به جز
 cc library
 timeline
 measurment log
