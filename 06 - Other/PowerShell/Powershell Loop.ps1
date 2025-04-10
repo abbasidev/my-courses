@@ -40,35 +40,21 @@ for ($i = 100; $i -lt 1000; $i++) {
 ///////////////////////////////////////////////////////////////////
 
 for ($i = 0; $i -lt 10; $i++) {
-    $folderName = "Alireza-00$i"
+    $folderName = "AS-00$i"
     New-Item -Path $folderName -ItemType Directory
-    New-Item -Path $folderName -Name "Alireza-00$i.txt" -ItemType File
+    New-Item -Path $folderName -Name "AS-00$i.txt" -ItemType File
 }
 
 for ($i = 10; $i -lt 100; $i++) {
-    $folderName = "Alireza-0$i"
+    $folderName = "AS-0$i"
     New-Item -Path $folderName -ItemType Directory
-    New-Item -Path $folderName -Name "Alireza-0$i.txt" -ItemType File
+    New-Item -Path $folderName -Name "AS-0$i.txt" -ItemType File
 }
 
 for ($i = 100; $i -lt 1000; $i++) {
-    $folderName = "Alireza-$i"
+    $folderName = "AS-$i"
     New-Item -Path $folderName -ItemType Directory
-    New-Item -Path $folderName -Name "Alireza-$i.txt" -ItemType File
-}
-
-///////////////////////////////////////////////////////////////////
-
-for ($i = 0; $i -lt 10; $i++) {
-    $folderName = "Nosrat-0$i"
-    New-Item -Path $folderName -ItemType Directory
-    New-Item -Path $folderName -Name "Nosrat-0$i.txt" -ItemType File
-}
-
-for ($i = 10; $i -lt 100; $i++) {
-    $folderName = "Nosrat-$i"
-    New-Item -Path $folderName -ItemType Directory
-    New-Item -Path $folderName -Name "Nosrat-$i.txt" -ItemType File
+    New-Item -Path $folderName -Name "AS-$i.txt" -ItemType File
 }
 
 ///////////////////////////////////////////////////////////////////
